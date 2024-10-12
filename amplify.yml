@@ -17,7 +17,7 @@ frontend:
         # fi
     build:
       commands:
-        - 'tailwindcss -i ./assets/main.css -o ./node_modules/.cache/nativewind/main.css.web.css'
+        - 'pnpm tailwindcss -i ./assets/main.css -o ./node_modules/.cache/nativewind/main.css.web.css'
         - 'pnpm run build:production:web'
   artifacts:
     # baseDirectory: /
