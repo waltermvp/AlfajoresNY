@@ -15,11 +15,11 @@ frontend:
           else
           npm install
           fi
-        # - yarn generate
+        - yarn generate
     build:
       commands:
         # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
-        # - 'npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css'
+        - 'npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css'
         - 'npx expo export --platform web'
   artifacts:
     # baseDirectory: /
