@@ -1,3 +1,4 @@
+import { loadStripe } from '@stripe/stripe-js';
 import { type Schema } from 'amplify/data/resource';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
@@ -17,9 +18,9 @@ const extractUrl = (data) => {
   // Remove the curly braces and match the URL
   const cleanData = data.replace(/[{}]/g, ''); // Remove the curly braces
   const match = cleanData.match(/url=(.*)/); // Extract URL after 'url='
-
-  if (match && match[1]) {
-    return match[1].trim(); // Return the extracted URL without spaces
+  const match2 = cleanData.match(/id=(.*)/); // Extract URL after 'url='
+  if (match && match[1] && match2 && match2[1]) {
+    return { url: match[1].trim(), id: match2[1].trim() }; // Return the extracted URL without spaces
   }
   return null;
 };
@@ -32,15 +33,44 @@ export default function Onboarding() {
 
   const handleBuyNow = async (cookieType: any) => {
     setLoading(true);
+
+    // how can i tell if im in safari or chrome
+    if (window.navigator.userAgent.includes('Chrome')) {
+      handleLoginChrome(cookieType);
+    } else {
+      handleLoginSafari();
+    }
+
+    setLoading(false);
+  };
+
+  const handleLoginSafari = async () => {
+    const stripe = await loadStripe(
+      'pk_test_tDOoOWsP30M63V52kT4Gun1G005AcuotiJ',
+    );
+
+    const response = await clientA.queries.purchase({
+      name: 'alfajores',
+    });
+    const data = extractUrl(response.data);
+    stripe
+      ?.redirectToCheckout({
+        sessionId: data?.id,
+      })
+      .then((result: { error?: { message: string } }) => {
+        if (result.error) {
+          // Display error to your customer (e.g., insufficient funds)
+          console.error(result.error.message);
+        }
+      });
+  };
+
+  const handleLoginChrome = async (cookieType: any) => {
     const result = await clientA.queries.purchase({ name: cookieType });
     if (result.data) {
-      console.log('---', result.data, '333');
       const extractedUrl = extractUrl(result.data);
-
-      console.log(extractedUrl, 'ddd');
       Linking.openURL(extractedUrl);
     }
-    setLoading(false);
   };
 
   return (

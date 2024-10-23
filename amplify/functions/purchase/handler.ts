@@ -20,8 +20,9 @@ export const handler: Handler = async (event, context) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:3000/success.html',
-    cancel_url: 'http://localhost:3000/cancel.html',
+    success_url: 'http://localhost:8081/success',
+    cancel_url: 'http://localhost:8081/cancel',
   });
-  return { url: session.url };
+  console.log('session', session);
+  return { url: session.url, id: session.id };
 };
