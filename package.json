@@ -35,7 +35,8 @@
     "test:ci": "npx run test --coverage",
     "test:watch": "npx run test --watch",
     "install-maestro": "curl -Ls 'https://get.maestro.mobile.dev' | bash",
-    "e2e-test": "maestro test .maestro/ -e APP_ID=com.obytes.development"
+    "e2e-test": "maestro test .maestro/ -e APP_ID=com.obytes.development",
+    "generate": "npx ampx generate outputs --app-id d36ajgtvouix6g --branch main2"
   },
   "dependencies": {
     "@expo/metro-runtime": "^3.2.3",
