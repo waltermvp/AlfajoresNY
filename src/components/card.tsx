@@ -40,7 +40,8 @@ export const Card = ({ title, body, id, image, price }: Props) => {
         </Text>
         <SimpleStepper
           showText
-          valueChanged={(value) => console.log(value)}
+          stepValue={quantity}
+          valueChanged={setQuantity}
           useColor
           color={'white'}
         />

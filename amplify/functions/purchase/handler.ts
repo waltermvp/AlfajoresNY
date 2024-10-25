@@ -5,6 +5,7 @@ export const handler: Handler = async (event, context) => {
   // your function code goes here
   const { name } = event.arguments;
   console.log('name', name);
+  console.log('context', context);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
