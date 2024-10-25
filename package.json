@@ -125,7 +125,6 @@
     "type": "git",
     "url": "git+https://github.com/user/repo-name.git"
   },
-  "packageManager": "pnpm@9.8.0",
   "osMetadata": {
     "initVersion": "6.3.3"
   }
