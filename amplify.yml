@@ -1,32 +1,40 @@
 version: 1
 applications:
-  - appRoot: ./
+  - appRoot: apps/website
     frontend:
       phases:
-    preBuild:
-      commands:
-        - 'npm install -g pnpm'
-        - 'pnpm install'
-        # - nvm use 20
-        # - npm install --silent --global expo-cli
-        # - |-
-        # if [ -f yarn.lock ]; then
-        #  yarn
-        # elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-        #  npm ci --cache .npm --prefer-offline
-        # else
-        #  npm install
-        # fi
-    build:
-      commands:
-        # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
-        - 'npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css'
-        - 'npx expo export --platform web'
-      artifacts:
-      baseDirectory: dist
-      files:
-        - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-          - $(npm root --global)/**/*
+        preBuild:
+          commands:
+            - "npm install -g pnpm"
+            - "pnpm install"
+            # - nvm use 20
+            # - npm install --silent --global expo-cli
+            # - |-
+            # if [ -f yarn.lock ]; then
+            #  yarn
+            # elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            #  npm ci --cache .npm --prefer-offline
+            # else
+            #  npm install
+            # fi
+        build:
+          commands:
+            # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
+            - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
+            - "npx expo export --platform web"
+          artifacts:
+          baseDirectory: dist
+          files:
+            - "**/*"
+          cache:
+            paths:
+              - node_modules/**/*
+              - $(npm root --global)/**/*
+    # backend:
+    #   phases:
+    #     build:
+    #       commands:
+    #         - 'echo "No Build Commands"'
+    #   cache:
+    #     paths:
+    #       - 'node_modules/**/*'
