@@ -1,6 +1,8 @@
 version: 1
-frontend:
-  phases:
+applications:
+  - appRoot: ./
+    frontend:
+      phases:
     preBuild:
       commands:
         - 'npm install -g pnpm'
@@ -20,12 +22,11 @@ frontend:
         # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
         - 'npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css'
         - 'npx expo export --platform web'
-  artifacts:
-    # baseDirectory: /
-    baseDirectory: dist
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
-      - $(npm root --global)/**/*
+      artifacts:
+      baseDirectory: dist
+      files:
+        - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+          - $(npm root --global)/**/*
