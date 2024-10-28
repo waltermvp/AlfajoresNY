@@ -30,11 +30,3 @@ applications:
             paths:
               - node_modules/**/*
               - $(npm root --global)/**/*
-    # backend:
-    #   phases:
-    #     build:
-    #       commands:
-    #         - 'echo "No Build Commands"'
-    #   cache:
-    #     paths:
-    #       - 'node_modules/**/*'
