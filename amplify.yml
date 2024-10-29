@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: apps/website/
+  - appRoot: apps/website
     frontend:
       phases:
         preBuild:
