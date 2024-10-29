@@ -2,6 +2,7 @@
   <img alt="logo" src="./assets/icon.png" width="124px" style="border-radius:10px"/><br/>
 Mobile App </h1>
 
+# AlfajoresNY
 > This Project is based on [Obytes starter](https://starter.obytes.com)
 
 ## Requirements
