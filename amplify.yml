@@ -24,7 +24,7 @@ applications:
             - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
             - "npx expo export --platform web"
       artifacts:
-        baseDirectory: apps/website/dist
+        baseDirectory: dist
         files:
           - "**/*"
       cache:
