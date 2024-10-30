@@ -48,13 +48,13 @@ export default function Onboarding() {
     if (window.navigator.userAgent.includes('Chrome')) {
       handleLoginChrome(cookieType);
     } else {
-      handleLoginSafari();
+      handlePurchaseSafari();
     }
 
     setLoading(false);
   };
 
-  const handleLoginSafari = async () => {
+  const handlePurchaseSafari = async () => {
     const stripe = await loadStripe(
       'pk_test_tDOoOWsP30M63V52kT4Gun1G005AcuotiJ',
     );
@@ -99,9 +99,7 @@ export default function Onboarding() {
           Delicious Peruvian Alfajores, made with love in New York
         </Text>
 
-        <Text className="my-1 pt-6 text-left text-lg">
-          🚀 Production-ready{' '}
-        </Text>
+        <Text className="my-1 pt-6 text-left text-lg">🚀 Production-ready</Text>
         <Text className="my-1 text-left text-lg">
           🥷 Developer experience + Productivity
         </Text>
@@ -117,6 +115,7 @@ export default function Onboarding() {
         style={{ flexDirection: !isSmallScreen ? 'column' : 'row' }}
       >
         <Card
+          onClick={() => handleBuyNow('alfajores')}
           userId={0}
           id={0}
           image={'../../assets/IMG_0139.JPG'}
