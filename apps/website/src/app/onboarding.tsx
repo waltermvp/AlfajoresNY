@@ -4,19 +4,42 @@ import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Linking } from 'react-native';
+import { Linking, ScrollView } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
 import { Alfajor } from '@/components/alfajor';
 import { Card } from '@/components/card';
 import { useIsFirstTime } from '@/core/hooks';
 import { FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
-
 import outputs from '../amplify_outputs.json';
+import { PurchaseProps } from '@/api/posts/types';
+import { FlashList } from '@shopify/flash-list';
 
 Amplify.configure(outputs);
 
-const extractUrl = (data) => {
+const products = [
+  {
+    name: 'Large Alfajores Box',
+    price: 2000,
+    id: 'prod_12345',
+    body: 'Delicious fresh box of our largest alfajor. Contains 4',
+  }, // Price is in cents (e.g., $20.00)
+  {
+    name: 'Alfajores Box',
+    price: 1500,
+    id: 'prod_12346',
+    body: 'Delicious fresh box of our standard alfajor. Contains 6',
+  }, // Price is in cents (e.g., $20.00)
+  {
+    name: 'Small Alfajores Box',
+    price: 1300,
+    id: 'prod_12347',
+    body: 'Delicious fresh box of our largest alfajor. Contains 12',
+  }, // Price is in cents (e.g., $20.00)
+  // Add more products as needed
+];
+
+const extractUrl = (data: string) => {
   // Remove the curly braces and match the URL
   const cleanData = data.replace(/[{}]/g, ''); // Remove the curly braces
   const match = cleanData.match(/url=(.*)/); // Extract URL after 'url='
@@ -41,12 +64,13 @@ export default function Onboarding() {
   // };
   const isSmallScreen = useMediaQuery({ minWidth: 576 });
   console.log('isSmallScreen', isSmallScreen);
-  const handleBuyNow = async (cookieType: { any }) => {
+
+  const handleBuyNow = ({ quantity, productId }: PurchaseProps) => {
     setLoading(true);
 
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
-      handleLoginChrome(cookieType);
+      handleLoginChrome({ quantity, productId });
     } else {
       handlePurchaseSafari();
     }
@@ -75,16 +99,18 @@ export default function Onboarding() {
       });
   };
 
-  const handleLoginChrome = async (cookieType: any) => {
-    const result = await clientA.queries.purchase({ name: cookieType });
+  const handleLoginChrome = async ({ quantity, productId }: PurchaseProps) => {
+    const result = await clientA.queries.purchase({ quantity, productId });
     if (result.data) {
       const extractedUrl = extractUrl(result.data);
-      Linking.openURL(extractedUrl);
+      //TODO: handle missing extractedUrl
+      if (!extractedUrl) return;
+      Linking.openURL(extractedUrl?.url);
     }
   };
 
   return (
-    <View className="flex h-full items-center  justify-center">
+    <ScrollView className="flex h-full items-center  justify-center">
       <FocusAwareStatusBar />
 
       <View className="w-full flex-1">
@@ -110,40 +136,48 @@ export default function Onboarding() {
           💪 well maintained third-party libraries
         </Text>
       </View>
+
       <View
         className="mt-6 flex flex-row"
         style={{ flexDirection: !isSmallScreen ? 'column' : 'row' }}
       >
-        <Card
-          onClick={() => handleBuyNow('alfajores')}
-          userId={0}
-          id={0}
-          image={'../../assets/IMG_0139.JPG'}
-          // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
-          title={'Large Alfajores Box'}
-          body={'Delicious fresh box of our largest alfajor. Contains 4'}
-          price={'$20'}
-        />
-        <Card
-          userId={0}
-          id={0}
-          image={'../../assets/IMG_0139.JPG'}
-          // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
-          title={'Alfajores Box'}
-          body={'Delicious fresh box of our standard alfajor. Contains 6'}
-          price={'$20'}
-        />
-        <Card
-          userId={0}
-          id={0}
-          image={'../../assets/IMG_0139.JPG'}
-          // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
-          title={'Small Alfajores Box'}
-          body={'Delicious fresh box of our largest alfajor. Contains 12'}
-          price={'$20'}
-        />
+        {products.map((product) => (
+          <Card
+            onPress={handleBuyNow}
+            userId={0}
+            id={0}
+            image={'../../assets/IMG_0139.JPG'}
+            // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
+            title={product.name}
+            body={product.body}
+            price={`$${product.price.toString()}`}
+          />
+        ))}
       </View>
       <SafeAreaView className="mt-6 flex flex-row"></SafeAreaView>
-    </View>
+    </ScrollView>
   );
+}
+{
+  /* <FlashList
+className="mt-6 flex flex-row"
+horizontal={isSmallScreen}
+data={products}
+renderItem={({ item }) => {
+  console.log('item', item);
+  console.log('item', item.body);
+  return (
+    <Card
+      onPress={handleBuyNow}
+      userId={0}
+      id={0}
+      image={'../../assets/IMG_0139.JPG'}
+      // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
+      title={item.name}
+      body={item.body}
+      price={`$${item.price.toString()}`}
+    />
+  );
+}}
+/> */
 }
