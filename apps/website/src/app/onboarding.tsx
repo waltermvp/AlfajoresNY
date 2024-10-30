@@ -110,51 +110,55 @@ export default function Onboarding() {
   };
 
   return (
-    <ScrollView className="flex h-full items-center  justify-center">
-      <FocusAwareStatusBar />
+    <ScrollView>
+      <View className="flex h-full items-center  justify-center">
+        <FocusAwareStatusBar />
 
-      <View className="w-full flex-1">
-        {/* <Cover /> */}
-        <Alfajor style={{ width: '75%', alignSelf: 'center' }} />
-      </View>
-      <View className="justify-end ">
-        <Text className="my-3 text-center text-5xl font-bold">
-          ALFAJORES NY
-        </Text>
-        <Text className="mb-2 text-center text-lg text-gray-600">
-          Delicious Peruvian Alfajores, made with love in New York
-        </Text>
+        <View className="w-full flex-1 justify-center">
+          {/* <Cover /> */}
+          <Alfajor style={{ width: '75%', alignSelf: 'center' }} />
+        </View>
+        <View className="justify-end ">
+          <Text className="my-3 text-center text-5xl font-bold">
+            ALFAJORES NY
+          </Text>
+          <Text className="mb-2 text-center text-lg text-gray-600">
+            Delicious Peruvian Alfajores, made with love in New York
+          </Text>
 
-        <Text className="my-1 pt-6 text-left text-lg">🚀 Production-ready</Text>
-        <Text className="my-1 text-left text-lg">
-          🥷 Developer experience + Productivity
-        </Text>
-        <Text className="my-1 text-left text-lg">
-          🧩 Minimal code and dependencies
-        </Text>
-        <Text className="my-1 text-left text-lg">
-          💪 well maintained third-party libraries
-        </Text>
-      </View>
+          <Text className="my-1 pt-6 text-left text-lg">
+            🇵🇪 Peruvian Recipe
+          </Text>
+          <Text className="my-1 text-left text-lg">
+            🥷 Developer experience + Productivity
+          </Text>
+          <Text className="my-1 text-left text-lg">
+            🧩 Minimal code and dependencies
+          </Text>
+          <Text className="my-1 text-left text-lg">
+            💪 well maintained third-party libraries
+          </Text>
+        </View>
 
-      <View
-        className="mt-6 flex flex-row"
-        style={{ flexDirection: !isSmallScreen ? 'column' : 'row' }}
-      >
-        {products.map((product) => (
-          <Card
-            onPress={handleBuyNow}
-            userId={0}
-            id={0}
-            image={'../../assets/IMG_0139.JPG'}
-            // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
-            title={product.name}
-            body={product.body}
-            price={`$${product.price.toString()}`}
-          />
-        ))}
+        <View
+          className="mt-6 flex flex-row"
+          style={{ flexDirection: !isSmallScreen ? 'column' : 'row' }}
+        >
+          {products.map((product) => (
+            <Card
+              onPress={handleBuyNow}
+              userId={0}
+              id={0}
+              image={'../../assets/IMG_0139.JPG'}
+              // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
+              title={product.name}
+              body={product.body}
+              price={`$${product.price.toString()}`}
+            />
+          ))}
+        </View>
+        <SafeAreaView className="mt-6 flex flex-row"></SafeAreaView>
       </View>
-      <SafeAreaView className="mt-6 flex flex-row"></SafeAreaView>
     </ScrollView>
   );
 }
