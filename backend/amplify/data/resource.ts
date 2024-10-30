@@ -11,7 +11,8 @@ const schema = a.schema({
   purchase: a
     .query()
     .arguments({
-      name: a.string(),
+      quantity: a.integer(),
+      productId: a.string(),
     })
     .returns(a.string())
     .handler(a.handler.function(purchase))
