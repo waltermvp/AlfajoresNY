@@ -15,7 +15,7 @@ const images = [
   'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
 ];
 
-export const Card = ({ title, body, id, image, price }: Props) => {
+export const Card = ({ title, body, id, image, price, onPress }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
   return (
     // <Link href={`/feed/${id}`} asChild>
@@ -45,7 +45,12 @@ export const Card = ({ title, body, id, image, price }: Props) => {
           useColor
           color={'white'}
         />
-        <Button label="Buy Now" />
+        <Button
+          label="Buy Now"
+          onPress={() => {
+            onPress({ productId: id, quantity });
+          }}
+        />
       </View>
     </View>
     //   </Pressable>

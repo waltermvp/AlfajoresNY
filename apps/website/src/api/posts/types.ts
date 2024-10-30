@@ -5,7 +5,7 @@ export type PurchaseProps = {
 
 export type Post = {
   userId: number;
-  id: number;
+  id: string;
   title: string;
   body: string;
   price: string;

@@ -40,6 +40,7 @@ const products = [
 ];
 
 const extractUrl = (data: string) => {
+  console.log('data', data);
   // Remove the curly braces and match the URL
   const cleanData = data.replace(/[{}]/g, ''); // Remove the curly braces
   const match = cleanData.match(/url=(.*)/); // Extract URL after 'url='
@@ -66,26 +67,40 @@ export default function Onboarding() {
   console.log('isSmallScreen', isSmallScreen);
 
   const handleBuyNow = ({ quantity, productId }: PurchaseProps) => {
+    console.log('quantity', quantity, productId);
     setLoading(true);
 
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
       handleLoginChrome({ quantity, productId });
     } else {
-      handlePurchaseSafari();
+      handlePurchaseSafari({ quantity, productId });
     }
 
     setLoading(false);
   };
 
-  const handlePurchaseSafari = async () => {
+  const handlePurchaseSafari = async ({
+    quantity,
+    productId,
+  }: PurchaseProps) => {
     const stripe = await loadStripe(
       'pk_test_tDOoOWsP30M63V52kT4Gun1G005AcuotiJ',
     );
 
+    console.log(quantity, productId, 'passing to purchase');
     const response = await clientA.queries.purchase({
-      name: 'alfajores',
+      productId,
+      quantity,
     });
+
+    console.log('response', response);
+
+    if (response.errors) {
+      console.error(response.errors);
+      return;
+    }
+
     const data = extractUrl(response.data);
     stripe
       ?.redirectToCheckout({
@@ -148,7 +163,7 @@ export default function Onboarding() {
             <Card
               onPress={handleBuyNow}
               userId={0}
-              id={0}
+              id={product.id}
               image={'../../assets/IMG_0139.JPG'}
               // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
               title={product.name}

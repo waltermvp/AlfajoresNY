@@ -21,6 +21,8 @@ interface EventArguments {
 export const handler: Handler = async (event: EventArguments, context) => {
   const { productId, quantity } = event.arguments;
 
+  console.log("productId", productId);
+  console.log("quantity", quantity);
   // Ensure the product exists
   const product = products[productId];
   if (!product) {
