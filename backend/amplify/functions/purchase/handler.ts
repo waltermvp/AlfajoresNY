@@ -17,6 +17,7 @@ const products = {
 //     productId: keyof typeof products;
 //   };
 // }
+const COUNTRY_CODE_ARRAY = ["US"];
 
 export const handler: Handler = async (event, context) => {
   const { productId, quantity } = event.arguments;
@@ -30,9 +31,10 @@ export const handler: Handler = async (event, context) => {
     return { error: `Product with ID ${productId} not found` };
   }
 
-  console.log("context", context);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
+    shipping_address_collection: { allowed_countries: COUNTRY_CODE_ARRAY },
+    phone_number_collection: { enabled: true },
     line_items: [
       {
         price_data: {
@@ -40,7 +42,7 @@ export const handler: Handler = async (event, context) => {
           product_data: {
             name: product.name,
           },
-          unit_amount: 500, // price in cents
+          unit_amount: product.price, // price in cents
         },
         quantity: 1,
       },
@@ -50,6 +52,7 @@ export const handler: Handler = async (event, context) => {
 
     success_url: "http://localhost:8081/success",
     cancel_url: "http://localhost:8081/cancel",
+    // cancel_url: `http://localhost:3000/#/order`,
   });
   const returnParams = { url: session.url, id: session.id };
   return returnParams;

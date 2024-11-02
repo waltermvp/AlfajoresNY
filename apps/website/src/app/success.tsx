@@ -42,10 +42,9 @@ export default function Onboarding() {
         <View className="w-full flex-1 justify-center align-middle">
           {/* <Cover /> */}
           <Success
-            color={'#FFFF'}
+            color={'#28a745'}
             style={{
               width: '50%',
-
               alignSelf: 'center',
             }}
           />

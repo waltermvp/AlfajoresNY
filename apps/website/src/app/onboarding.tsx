@@ -57,14 +57,9 @@ export default function Onboarding() {
   const clientA = generateClient<Schema>();
   const [loading, setLoading] = React.useState(false);
 
-  // const breakpoints = {
-  //   small: 576,
-  //   medium: 768,
-  //   large: 992,
-  //   extraLarge: 1200,
-  // };
-  const isSmallScreen = useMediaQuery({ minWidth: 576 });
-  console.log('isSmallScreen', isSmallScreen);
+  // const isSmallScreen = useMediaQuery({ minWidth: 576 });
+  // const isMediumScreen = useMediaQuery({ minWidth: 768 });
+  const isLargeScreen = useMediaQuery({ minWidth: 992 });
 
   const handleBuyNow = ({ quantity, productId }: PurchaseProps) => {
     console.log('quantity', quantity, productId);
@@ -163,7 +158,7 @@ export default function Onboarding() {
             {/* 🕰️ */}
           </Text>
           <Text className="my-1 text-left text-lg">
-            ⏱️ Delivered Freshly made
+            ⏱️ Delivered Fresh within 72 hours
           </Text>
           {/* <Text className="my-1 text-left text-lg">
             💪 well maintained third-party libraries
@@ -172,7 +167,7 @@ export default function Onboarding() {
 
         <View
           className="mt-6 flex flex-row"
-          style={{ flexDirection: !isSmallScreen ? 'column' : 'row' }}
+          style={{ flexDirection: !isLargeScreen ? 'column' : 'row' }}
         >
           {products.map((product) => (
             <Card
@@ -192,27 +187,4 @@ export default function Onboarding() {
       </View>
     </ScrollView>
   );
-}
-{
-  /* <FlashList
-className="mt-6 flex flex-row"
-horizontal={isSmallScreen}
-data={products}
-renderItem={({ item }) => {
-  console.log('item', item);
-  console.log('item', item.body);
-  return (
-    <Card
-      onPress={handleBuyNow}
-      userId={0}
-      id={0}
-      image={'../../assets/IMG_0139.JPG'}
-      // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
-      title={item.name}
-      body={item.body}
-      price={`$${item.price.toString()}`}
-    />
-  );
-}}
-/> */
 }
