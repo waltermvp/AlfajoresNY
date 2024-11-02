@@ -18,11 +18,11 @@ const schema = a.schema({
     .handler(a.handler.function(purchase))
     .authorization((allow) => [allow.guest()]),
 
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.guest()]),
+  // Todo: a
+  //   .model({
+  //     content: a.string(),
+  //   })
+  //   .authorization((allow) => [allow.guest()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
