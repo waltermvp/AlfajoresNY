@@ -1,6 +1,6 @@
 export type PurchaseProps = {
   quantity: number;
-  productId: number;
+  productId: string;
 };
 
 export type Post = {

@@ -11,19 +11,20 @@ const products = {
   // Add more products as needed
 };
 
-interface EventArguments {
-  arguments: {
-    productId: keyof typeof products;
-    quantity: number;
-  };
-}
+// interface EventArguments {
+//   arguments: {
+//     quantity: number;
+//     productId: keyof typeof products;
+//   };
+// }
 
-export const handler: Handler = async (event: EventArguments, context) => {
+export const handler: Handler = async (event, context) => {
   const { productId, quantity } = event.arguments;
 
   console.log("productId", productId);
   console.log("quantity", quantity);
   // Ensure the product exists
+  // @ts-ignore
   const product = products[productId];
   if (!product) {
     return { error: `Product with ID ${productId} not found` };
@@ -50,6 +51,6 @@ export const handler: Handler = async (event: EventArguments, context) => {
     success_url: "http://localhost:8081/success",
     cancel_url: "http://localhost:8081/cancel",
   });
-  console.log("session", session);
-  return { url: session.url, id: session.id };
+  const returnParams = { url: session.url, id: session.id };
+  return returnParams;
 };

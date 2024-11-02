@@ -1,5 +1,5 @@
-import { loadStripe } from '@stripe/stripe-js';
-import { type Schema } from 'amplify/data/resource';
+import { loadStripe, RedirectToCheckoutServerOptions } from '@stripe/stripe-js';
+import { type Schema } from '../../../../backend/amplify/data/resource';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { useRouter } from 'expo-router';
@@ -72,7 +72,7 @@ export default function Onboarding() {
 
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
-      handleLoginChrome({ quantity, productId });
+      handlePurhcaseChrome({ quantity, productId });
     } else {
       handlePurchaseSafari({ quantity, productId });
     }
@@ -88,13 +88,14 @@ export default function Onboarding() {
       'pk_test_tDOoOWsP30M63V52kT4Gun1G005AcuotiJ',
     );
 
-    console.log(quantity, productId, 'passing to purchase');
+    console.log(quantity, 'passing to quantity purchase');
+    console.log(productId, 'passing to productId purchase');
     const response = await clientA.queries.purchase({
-      productId,
       quantity,
+      productId,
     });
 
-    console.log('response', response);
+    console.log('response', JSON.stringify(response.data, null, 2));
 
     if (response.errors) {
       console.error(response.errors);
@@ -102,10 +103,19 @@ export default function Onboarding() {
     }
 
     const data = extractUrl(response.data);
+    console.log('data', data);
+
+    if (!data) {
+      console.error('No data found');
+      return;
+    }
+
+    const stripeProps: RedirectToCheckoutServerOptions = {
+      sessionId: data.id,
+    };
+
     stripe
-      ?.redirectToCheckout({
-        sessionId: data?.id,
-      })
+      ?.redirectToCheckout(stripeProps)
       .then((result: { error?: { message: string } }) => {
         if (result.error) {
           // Display error to your customer (e.g., insufficient funds)
@@ -114,8 +124,12 @@ export default function Onboarding() {
       });
   };
 
-  const handleLoginChrome = async ({ quantity, productId }: PurchaseProps) => {
+  const handlePurhcaseChrome = async ({
+    quantity,
+    productId,
+  }: PurchaseProps) => {
     const result = await clientA.queries.purchase({ quantity, productId });
+    console.log('result', result);
     if (result.data) {
       const extractedUrl = extractUrl(result.data);
       //TODO: handle missing extractedUrl
@@ -161,6 +175,7 @@ export default function Onboarding() {
         >
           {products.map((product) => (
             <Card
+              key={product.id}
               onPress={handleBuyNow}
               userId={0}
               id={product.id}
