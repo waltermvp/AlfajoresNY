@@ -159,14 +159,15 @@ export default function Onboarding() {
             🇵🇪 Peruvian Recipe
           </Text>
           <Text className="my-1 text-left text-lg">
-            🥷 Developer experience + Productivity
+            👴🏼 More than 25 years of selling alfajores in NYC
+            {/* 🕰️ */}
           </Text>
           <Text className="my-1 text-left text-lg">
-            🧩 Minimal code and dependencies
+            ⏱️ Delivered Freshly made
           </Text>
-          <Text className="my-1 text-left text-lg">
+          {/* <Text className="my-1 text-left text-lg">
             💪 well maintained third-party libraries
-          </Text>
+          </Text> */}
         </View>
 
         <View
