@@ -2,10 +2,10 @@ import type { AxiosError } from 'axios';
 import { createMutation } from 'react-query-kit';
 
 import { client } from '../common';
-import type { Post } from './types';
+import type { Product } from './types';
 
 type Variables = { title: string; body: string; userId: number };
-type Response = Post;
+type Response = Product;
 
 export const useAddPost = createMutation<Response, Variables, AxiosError>({
   mutationFn: async (variables) =>

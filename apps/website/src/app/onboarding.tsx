@@ -183,7 +183,7 @@ export default function Onboarding() {
               // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
               title={product.name}
               body={product.body}
-              price={`$${product.price.toString()}`}
+              price={product.price}
             />
           ))}
         </View>

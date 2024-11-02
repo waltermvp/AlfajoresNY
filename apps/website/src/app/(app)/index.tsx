@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import React from 'react';
 
-import type { Post } from '@/api';
+import type { Product } from '@/api';
 import { usePosts } from '@/api';
 import { Card } from '@/components/card';
 import { EmptyList, FocusAwareStatusBar, Text, View } from '@/ui';
@@ -9,8 +9,8 @@ import { EmptyList, FocusAwareStatusBar, Text, View } from '@/ui';
 export default function Feed() {
   const { data, isPending, isError } = usePosts();
   const renderItem = React.useCallback(
-    ({ item }: { item: Post }) => <Card {...item} />,
-    []
+    ({ item }: { item: Product }) => <Card {...item} />,
+    [],
   );
 
   if (isError) {

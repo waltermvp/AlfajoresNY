@@ -2,10 +2,10 @@
 import React from 'react';
 import SimpleStepper from 'react-native-simple-stepper';
 
-import type { Post } from '@/api';
+import type { Product } from '@/api';
 import { Button, Image, Text, View } from '@/ui';
 
-type Props = Post;
+type Props = Product;
 
 const images = [
   'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80',
@@ -17,6 +17,12 @@ const images = [
 
 export const Card = ({ title, body, id, image, price, onPress }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
+
+  const dollars = (Number(price) / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
   return (
     // <Link href={`/feed/${id}`} asChild>
     //   <Pressable>
@@ -36,12 +42,13 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
           {body}
         </Text>
         <Text numberOfLines={0} className="leading-snug text-blue-900">
-          {price}
+          {dollars}
         </Text>
         <SimpleStepper
           showText
           stepValue={1}
           valueChanged={setQuantity}
+          disableDecrementImageTintColor={false}
           useColor
           color={'white'}
         />

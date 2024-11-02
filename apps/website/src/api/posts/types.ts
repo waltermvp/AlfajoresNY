@@ -3,12 +3,12 @@ export type PurchaseProps = {
   productId: string;
 };
 
-export type Post = {
+export type Product = {
   userId: number;
   id: string;
   title: string;
   body: string;
-  price: string;
+  price: number;
   image: string;
   onPress: ({ quantity, productId }: PurchaseProps) => void;
 };
