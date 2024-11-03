@@ -1,6 +1,7 @@
 export type PurchaseProps = {
   quantity: number;
   productId: string;
+  zipCode: string;
 };
 
 export type Product = {
@@ -10,5 +11,6 @@ export type Product = {
   body: string;
   price: number;
   image: string;
-  onPress: ({ quantity, productId }: PurchaseProps) => void;
+  loading: boolean;
+  onPress: ({ quantity, productId, zipCode }: PurchaseProps) => void;
 };

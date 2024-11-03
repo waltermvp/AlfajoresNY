@@ -15,7 +15,15 @@ const images = [
   'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
 ];
 
-export const Card = ({ title, body, id, image, price, onPress }: Props) => {
+export const Card = ({
+  title,
+  body,
+  id,
+  image,
+  price,
+  onPress,
+  loading,
+}: Props) => {
   const [quantity, setQuantity] = React.useState(1);
 
   const dollars = (Number(price) / 100).toLocaleString('en-US', {
@@ -34,6 +42,7 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
           // uri: images[Math.floor(Math.random() * images.length)],
           uri: image,
         }}
+        // source={image}
       />
 
       <View className="p-2">
@@ -50,12 +59,15 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
           valueChanged={setQuantity}
           disableDecrementImageTintColor={false}
           useColor
-          color={'white'}
+          color={'black'}
         />
+
+        {/* //TODO: Add zip code input */}
         <Button
+          loading={loading}
           label="Buy Now"
           onPress={() => {
-            onPress({ productId: id, quantity });
+            onPress({ productId: id, quantity, zipCode: '12345' });
           }}
         />
       </View>

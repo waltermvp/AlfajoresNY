@@ -13,6 +13,7 @@ const schema = a.schema({
     .arguments({
       quantity: a.integer(),
       productId: a.string(),
+      zipCode: a.string(),
     })
     .returns(a.string())
     .handler(a.handler.function(purchase))

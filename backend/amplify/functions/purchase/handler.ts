@@ -18,6 +18,7 @@ const products = {
 //   };
 // }
 const COUNTRY_CODE_ARRAY = ["US"];
+const allowedZipCodes = ["10001", "20001", "94103"];
 
 export const handler: Handler = async (event, context) => {
   const { productId, quantity } = event.arguments;
