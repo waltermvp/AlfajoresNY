@@ -61,15 +61,15 @@ export default function Onboarding() {
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
   const isLargeScreen = useMediaQuery({ minWidth: 992 });
 
-  const handleBuyNow = ({ quantity, productId }: PurchaseProps) => {
+  const handleBuyNow = ({ quantity, productId, zipCode }: PurchaseProps) => {
     console.log('quantity', quantity, productId);
     setLoading(true);
 
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
-      handlePurhcaseChrome({ quantity, productId });
+      handlePurhcaseChrome({ quantity, productId, zipCode });
     } else {
-      handlePurchaseSafari({ quantity, productId });
+      handlePurchaseSafari({ quantity, productId, zipCode });
     }
 
     setLoading(false);
@@ -124,18 +124,27 @@ export default function Onboarding() {
     productId,
   }: PurchaseProps) => {
     const result = await clientA.queries.purchase({ quantity, productId });
-    console.log('result', result);
+    console.log('result.data', result.data);
+
     if (result.data) {
-      const extractedUrl = extractUrl(result.data);
-      //TODO: handle missing extractedUrl
-      if (!extractedUrl) return;
-      Linking.openURL(extractedUrl?.url);
+      const parsedData = parseData(result.data);
+
+      if (parsedData?.url) {
+        console.log('URL:', parsedData.url);
+        console.log('ID:', parsedData.id);
+        Linking.openURL(parsedData.url);
+      } else {
+        console.log('Failed to parse data.');
+      }
     }
   };
 
   return (
     <ScrollView>
-      <View className="flex h-full items-center  justify-center">
+      <View
+        style={{ backgroundColor: 'black' }}
+        className="flex h-full items-center  justify-center "
+      >
         <FocusAwareStatusBar />
 
         <View className="w-full flex-1 justify-center">
@@ -143,21 +152,21 @@ export default function Onboarding() {
           <Alfajor style={{ width: '75%', alignSelf: 'center' }} />
         </View>
         <View className="justify-end ">
-          <Text className="my-3 text-center text-5xl font-bold">
+          <Text className="my-3 text-center text-5xl font-bold   color-white">
             ALFAJORES NY
           </Text>
-          <Text className="mb-2 text-center text-lg text-gray-600">
+          <Text className="mb-2 text-center text-lg text-gray-100">
             Delicious Peruvian Alfajores, made with love in New York
           </Text>
 
-          <Text className="my-1 pt-6 text-left text-lg">
+          <Text className="my-1 pt-6 text-left text-lg   color-white">
             🇵🇪 Peruvian Recipe
           </Text>
-          <Text className="my-1 text-left text-lg">
+          <Text className="my-1 text-left text-lg   color-white">
             👴🏼 More than 25 years of selling alfajores in NYC
             {/* 🕰️ */}
           </Text>
-          <Text className="my-1 text-left text-lg">
+          <Text className="my-1 text-left text-lg   color-white">
             ⏱️ Delivered Fresh within 72 hours
           </Text>
           {/* <Text className="my-1 text-left text-lg">
@@ -171,6 +180,7 @@ export default function Onboarding() {
         >
           {products.map((product) => (
             <Card
+              loading={loading}
               key={product.id}
               onPress={handleBuyNow}
               userId={0}
@@ -183,8 +193,28 @@ export default function Onboarding() {
             />
           ))}
         </View>
+
         <SafeAreaView className="mt-6 flex flex-row"></SafeAreaView>
       </View>
     </ScrollView>
   );
+}
+
+interface ParsedData {
+  url: string;
+  id: string;
+}
+
+function parseData(input: string): ParsedData | null {
+  const regex = /{url=(.*), id=(.*)}/;
+  const match = input.match(regex);
+
+  if (match) {
+    return {
+      url: match[1],
+      id: match[2],
+    };
+  }
+
+  return null;
 }
