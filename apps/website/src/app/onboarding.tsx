@@ -1,5 +1,5 @@
 import { loadStripe, RedirectToCheckoutServerOptions } from '@stripe/stripe-js';
-import { type Schema } from '../../../../amplify/data/resource';
+import { type Schema } from '../../../../backend/amplify/data/resource';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { useRouter } from 'expo-router';
@@ -23,18 +23,21 @@ const products = [
     price: 2000,
     id: 'prod_12345',
     body: 'Delicious fresh box of our largest alfajor. Contains 4',
+    image: '../../assets/IMG_0139.JPG',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Alfajores Box',
     price: 1500,
     id: 'prod_12346',
     body: 'Delicious fresh box of our standard alfajor. Contains 6',
+    image: '../../assets/IMG_0139.JPG',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Small Alfajores Box',
     price: 1300,
     id: 'prod_12347',
     body: 'Delicious fresh box of our largest alfajor. Contains 12',
+    image: '../../assets/IMG_0139.JPG',
   }, // Price is in cents (e.g., $20.00)
   // Add more products as needed
 ];
@@ -61,7 +64,11 @@ export default function Onboarding() {
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
   const isLargeScreen = useMediaQuery({ minWidth: 992 });
 
-  const handleBuyNow = ({ quantity, productId, zipCode }: PurchaseProps) => {
+  const handleBuyNow = async ({
+    quantity,
+    productId,
+    zipCode,
+  }: PurchaseProps) => {
     console.log('quantity', quantity, productId);
     setLoading(true);
 
@@ -185,7 +192,8 @@ export default function Onboarding() {
               onPress={handleBuyNow}
               userId={0}
               id={product.id}
-              image={'../../assets/IMG_0139.JPG'}
+              image={product.image}
+              // image={'./IMG_0139.JPG'}
               // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
               title={product.name}
               body={product.body}

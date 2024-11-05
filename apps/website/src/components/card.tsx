@@ -7,22 +7,15 @@ import { Button, Image, Text, View } from '@/ui';
 
 type Props = Product;
 
-const images = [
-  'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1515386474292-47555758ef2e?auto=format&fit=crop&w=800&q=80',
-  'https://plus.unsplash.com/premium_photo-1666815503002-5f07a44ac8fb?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
-];
-
 export const Card = ({ title, body, id, image, price, onPress }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
 
+  const [loading, setLoading] = React.useState(false);
   const dollars = (Number(price) / 100).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });
-
+  console.log('image', image);
   return (
     // <Link href={`/feed/${id}`} asChild>
     //   <Pressable>
@@ -53,9 +46,12 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
           color={'white'}
         />
         <Button
+          loading={loading}
           label="Buy Now"
-          onPress={() => {
-            onPress({ productId: id, quantity });
+          onPress={async () => {
+            setLoading(true);
+            await onPress({ productId: id, quantity, zipCode: '10001' });
+            setLoading(false);
           }}
         />
       </View>
@@ -64,3 +60,11 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
     // </Link>
   );
 };
+
+const images = [
+  'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1515386474292-47555758ef2e?auto=format&fit=crop&w=800&q=80',
+  'https://plus.unsplash.com/premium_photo-1666815503002-5f07a44ac8fb?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
+];

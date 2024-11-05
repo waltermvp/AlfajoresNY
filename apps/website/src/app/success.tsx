@@ -1,5 +1,5 @@
 import { loadStripe, RedirectToCheckoutServerOptions } from '@stripe/stripe-js';
-import { type Schema } from '../../../../amplify/data/resource';
+import { type Schema } from '../../../../backend/amplify/data/resource';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { Link, useRouter } from 'expo-router';

@@ -1,6 +1,7 @@
 export type PurchaseProps = {
   quantity: number;
   productId: string;
+  zipCode: string;
 };
 
 export type Product = {
