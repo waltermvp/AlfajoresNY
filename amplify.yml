@@ -8,7 +8,7 @@ applications:
             - rm -rf node_modules
             - "npm install -g pnpm"
             - "pnpm install"
-            - "pnpm run generate"
+            # - "pnpm run generate"
             # - nvm use 20
             # - npm install --silent --global expo-cli
             # - |-
