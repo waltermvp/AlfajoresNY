@@ -1,19 +1,13 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_nylz48mDb",
+    "user_pool_id": "us-east-1_8YCCPjPSm",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "7afp5i6c68jdhpuogp7h62u2d3",
-    "identity_pool_id": "us-east-1:21c4315a-bd8b-4d56-a40f-04521a4b2341",
+    "user_pool_client_id": "32de2um1emios9o8ml7j323oaq",
+    "identity_pool_id": "us-east-1:f0b17540-75ce-43e6-ac80-72cd479f30b6",
     "mfa_methods": [],
-    "standard_required_attributes": [
-      "email"
-    ],
-    "username_attributes": [
-      "email"
-    ],
-    "user_verification_types": [
-      "email"
-    ],
+    "standard_required_attributes": ["email"],
+    "username_attributes": ["email"],
+    "user_verification_types": ["email"],
     "groups": [],
     "mfa_configuration": "NONE",
     "password_policy": {
@@ -26,81 +20,13 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://5tjfxjizlrg3lagytfxeb7dfoy.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://vshupwxdcfb2nf5f4gssu7cmoy.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
     "default_authorization_type": "AWS_IAM",
-    "authorization_types": [
-      "AMAZON_COGNITO_USER_POOLS"
-    ],
+    "authorization_types": ["AMAZON_COGNITO_USER_POOLS"],
     "model_introspection": {
       "version": 1,
-      "models": {
-        "Todo": {
-          "name": "Todo",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "content": {
-              "name": "content",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "Todos",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "allow": "public",
-                    "provider": "iam",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        }
-      },
+      "models": {},
       "enums": {},
       "nonModels": {},
       "queries": {
@@ -110,8 +36,14 @@
           "type": "String",
           "isRequired": false,
           "arguments": {
-            "name": {
-              "name": "name",
+            "quantity": {
+              "name": "quantity",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "productId": {
+              "name": "productId",
               "isArray": false,
               "type": "String",
               "isRequired": false
