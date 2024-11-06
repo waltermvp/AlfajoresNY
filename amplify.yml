@@ -53,7 +53,7 @@ applications:
         - '**/*'
     cache:
       paths: []
-    appRoot: apps/website
+    appRoot: backend
   # - frontend:
   #   phases:
   #     preBuild:
