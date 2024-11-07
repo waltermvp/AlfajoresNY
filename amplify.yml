@@ -9,7 +9,7 @@ applications:
           - "pnpm install"
       build:
         commands:
-          - npm run build
+          # - npm run build
           #             # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
           - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
           - "npx expo export --platform web"
