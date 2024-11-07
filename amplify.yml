@@ -1,37 +1,92 @@
+version: 1
 applications:
-  - frontend:
-    phases:
-      preBuild:
-        commands:
-          # - npm ci
-          - rm -rf node_modules
-          - "npm install -g pnpm"
-          - "pnpm install"
-      build:
-        commands:
-          # - npm run build
-          #             # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
-          - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
-          - "npx expo export --platform web"
-    artifacts:
-      baseDirectory: /
-      files:
-        - '**/*'
-    cache:
+  - appRoot: apps/website
+    env:
+      variables:
+        key: value
+    # backend:
+    #   phases:
+    #     preBuild:
+    #       commands:
+    #         - *enter command*
+    #     build:
+    #       commands:
+    #         - *enter command*
+    #     postBuild:
+    #         commands:
+    #         - *enter command*
+    frontend:
+      buildPath: / # Run install and build from the monorepo project root
+      phases:
+        preBuild:
+          commands:
+            - rm -rf node_modules
+            - "npm install -g pnpm"
+            - "pnpm install"
+        build:
+          commands:
+            - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
+            - "npx expo export --platform web"
+            
+      artifacts:
+       baseDirectory: /
+       files:
+         - '**/*'
+      cache:
       paths: []
-    appRoot: apps/website
-  # - frontend:
-  #   phases:
-  #     preBuild:
-  #       commands:
-  #         - npm ci
-  #     build:
-  #       commands:
-  #         - npm run build
-  #   artifacts:
-  #     baseDirectory: /
-  #     files:
-  #       - '**/*'
-  #   cache:
-  #     paths: []
-  #   appRoot: app2
+
+    # test:
+    #   phases:
+    #     preTest:
+    #       commands:
+    #         - exit 0
+    #     test:
+    #       commands:
+    #         - exit 0
+    #     postTest:
+    #       commands:
+    #         - exit 0
+    #   artifacts:
+    #     files:
+    #         - location
+    #         - location
+    #     configFilePath: *location*
+    #     baseDirectory: *location*
+    
+# applications:
+#   appRoot: apps/website
+#   - frontend:
+#     phases:
+#       preBuild:
+#         commands:
+#           # - npm ci
+#           - rm -rf node_modules
+#           - "npm install -g pnpm"
+#           - "pnpm install"
+#       build:
+#         commands:
+#           # - npm run build
+#           #             # - 'pnpm tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/main.css.web.css'
+#           - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
+#           - "npx expo export --platform web"
+#     artifacts:
+#       baseDirectory: /
+#       files:
+#         - '**/*'
+#     cache:
+#       paths: []
+#   # - frontend:
+#   #   phases:
+#   #     preBuild:
+#   #       commands:
+#   #         - npm ci
+#   #     build:
+#   #       commands:
+#   #         - npm run build
+#   #   artifacts:
+#   #     baseDirectory: /
+#   #     files:
+#   #       - '**/*'
+#   #   cache:
+#   #     paths: []
+#   #   appRoot: app2
