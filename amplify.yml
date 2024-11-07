@@ -19,7 +19,7 @@ applications:
         - '**/*'
     cache:
       paths: []
-    appRoot: backend
+    appRoot: apps/website
   # - frontend:
   #   phases:
   #     preBuild:
