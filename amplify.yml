@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: apps/website
+  - appRoot: packages/backend
     env:
       variables:
         key: value
@@ -27,11 +27,11 @@ applications:
           commands:
             - "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.web.css"
             - "npx expo export --platform web"
-            
+
       artifacts:
-       baseDirectory: /
-       files:
-         - '**/*'
+        baseDirectory: /
+        files:
+          - "**/*"
       cache:
       paths: []
 
@@ -52,7 +52,6 @@ applications:
     #         - location
     #     configFilePath: *location*
     #     baseDirectory: *location*
-    
 # applications:
 #   appRoot: apps/website
 #   - frontend:
