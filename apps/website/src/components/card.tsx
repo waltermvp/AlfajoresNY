@@ -1,21 +1,84 @@
-// import { Image } from 'expo-image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SimpleStepper from 'react-native-simple-stepper';
 
 import type { Product } from '@/api';
-import { Button, Image, Text, View } from '@/ui';
+import { Button, Image, Input, Modal, Text, useModal, View } from '@/ui';
+import { Alert } from 'react-native';
 
 type Props = Product;
 
 export const Card = ({ title, body, id, image, price, onPress }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
+  const { ref, present, dismiss } = useModal();
 
   const [loading, setLoading] = React.useState(false);
   const dollars = (Number(price) / 100).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });
-  console.log('image', image);
+
+  // Zip Code
+  const [error, setError] = useState<undefined | string>();
+  const [zipcode, setZipCode] = useState<undefined | string>();
+  const [checkingZip, setCheckingZip] = useState(false);
+  function validateZipCodeThenUpdateError() {
+    console.log(zipcode, 'zip');
+    console.log(zipcode?.length, 'zip length');
+    if (zipcode?.length === 5) {
+      setError(undefined);
+      return true;
+    } else {
+      setError('please enter a valid Zip code');
+      return false;
+    }
+  }
+
+  async function checkZipOnServer() {
+    try {
+      setCheckingZip(true);
+      // setTimeout(() => {}, 2000);
+      // setCheckingZip(false);
+    } catch (error) {
+      console.log(error, 'error');
+      setCheckingZip(false);
+    }
+  }
+
+  useEffect(() => {
+    validateZipCodeThenUpdateError();
+  }, [zipcode]);
+
+  async function showZipCodePicker() {
+    Alert.prompt(
+      'Enter Zip Code',
+      'Please enter your zip code to ensure we cam deliver to you.',
+      (text) => {
+        console.log('Alert text is ', text);
+        //Add nuttones
+        return [];
+      },
+      'plain-text',
+      '1001',
+      'number-pad',
+
+      {
+        cancelable: true,
+        userInterfaceStyle: 'unspecified',
+        onDismiss: () => {
+          console.log('on dismiss');
+        },
+      },
+    );
+
+    // try {
+    //   setLoading(true);
+    //   await onPress({ productId: id, quantity, zipCode: '10001' });
+    //   setLoading(false);
+    // } catch (error) {
+    //   setLoading(false);
+    // }
+  }
+
   return (
     // <Link href={`/feed/${id}`} asChild>
     //   <Pressable>
@@ -43,17 +106,40 @@ export const Card = ({ title, body, id, image, price, onPress }: Props) => {
           valueChanged={setQuantity}
           disableDecrementImageTintColor={false}
           useColor
-          color={'white'}
+          color={'black'}
         />
         <Button
           loading={loading}
           label="Buy Now"
-          onPress={async () => {
-            setLoading(true);
-            await onPress({ productId: id, quantity, zipCode: '10001' });
-            setLoading(false);
+          onPress={() => {
+            present();
           }}
         />
+        <Modal
+          snapPoints={['60%']}
+          title="Enter Zip Code"
+          ref={ref}
+          onDismiss={() => {
+            console.log('on dismiss');
+          }}
+        >
+          <Text>
+            Please enter your zip code to make sure we can deliver to you.
+          </Text>
+          <Input
+            placeholder="11001"
+            onChangeText={(text) => {
+              setZipCode(text);
+            }}
+            error={error}
+          />
+          <Button
+            label="Check Zip"
+            disabled={error ? true : false}
+            loading={checkingZip}
+            onPress={checkZipOnServer}
+          />
+        </Modal>
       </View>
     </View>
     //   </Pressable>

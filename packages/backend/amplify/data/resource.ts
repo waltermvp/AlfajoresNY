@@ -1,5 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { purchase } from "../functions/purchase/resource";
+import { purchase, validateZipCode } from "../functions/purchase/resource";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -16,6 +16,15 @@ const schema = a.schema({
     })
     .returns(a.string())
     .handler(a.handler.function(purchase))
+    .authorization((allow) => [allow.guest()]),
+
+  validateZipCode: a
+    .query()
+    .arguments({
+      string: a.integer(),
+    })
+    .returns(a.string())
+    .handler(a.handler.function(validateZipCode))
     .authorization((allow) => [allow.guest()]),
 
   // Todo: a
