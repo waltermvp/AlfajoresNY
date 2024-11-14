@@ -1,0 +1,703 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "amplify-backend-waltervargaspena-sandbox-b866b676a4.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "amplify-backend-waltervargaspena-sandbox-b866b676a4.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "amplify-backend-waltervargaspena-sandbox-b866b676a4": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "amplify-backend-waltervargaspena-sandbox-b866b676a4.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "amplify:deployment-type": "sandbox",
+          "created-by": "amplify"
+        },
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4b2c0046b33416f27c5a7ef378ea6cae41aa8dd7a996f2d7870ddd02ddea2534.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "amplify-backend-waltervargaspena-sandbox-b866b676a4.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "amplify-backend-waltervargaspena-sandbox-b866b676a4.assets"
+      ],
+      "metadata": {
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "amplify:deployment-type",
+                "Value": "sandbox"
+              },
+              {
+                "Key": "created-by",
+                "Value": "amplify"
+              }
+            ]
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/deploymentType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentType"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "region"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPool4BA7F805"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/UserPoolAppClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPoolAppClient2626C6F8"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/IdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPool3FDE84CC"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/authenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthauthenticatedUserRoleD8DA3689"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthunauthenticatedUserRole2B524D9E"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifyAuth/IdentityPoolRoleAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPoolRoleAttachment045F17C8"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPool8BCCC199Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPool8BCCC199Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPoolAppClient16F89F5ERef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPoolAppClient16F89F5ERef"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth/amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/auth.NestedStack/auth.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "auth179371D7"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/userPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/webClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "webClientId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/identityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identityPoolId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/authRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "authRegion"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/allowUnauthenticatedIdentities": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "allowUnauthenticatedIdentities"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/signupAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "signupAttributes"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/usernameAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "usernameAttributes"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/verificationMechanisms": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "verificationMechanisms"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/passwordPolicyMinLength": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyMinLength"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/passwordPolicyRequirements": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyRequirements"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/mfaConfiguration": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaConfiguration"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/mfaTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaTypes"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/socialProviders": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "socialProviders"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthCognitoDomain": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthCognitoDomain"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthScope": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthScope"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthRedirectSignIn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignIn"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthRedirectSignOut": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignOut"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthResponseType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthResponseType"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/oauthClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthClientId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/groups": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "groups"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/GraphQLAPI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPI42A6FA33"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/GraphQLAPI/TransformerSchema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/GraphQLAPI/NONE_DS": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPINONEDS684BF699"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "FnPurchaseLambdaDataSource"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FnPurchaseLambdaDataSourceServiceRoleC37936DF"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FnPurchaseLambdaDataSourceServiceRoleDefaultPolicy649515EB"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FnPurchaseLambdaDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "FnPurchaseLambdaDataSource"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/InvokeFnPurchaseLambdaDataSource/InvokeFnPurchaseLambdaDataSource.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InvokeFnPurchaseLambdaDataSourceInvokeFnPurchaseLambdaDataSourceAppSyncFunction5BD92BA2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "InvokeFnPurchaseLambdaDataSource"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/queryPurchaseResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerypurchaseResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.purchase"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/QueryPurchaseAuthFN/QueryPurchaseAuthFN.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryPurchaseAuthFNQueryPurchaseAuthFNAppSyncFunction7E874DAC"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryPurchaseAuthFN"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputs.amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPINONEDS4DDC4959Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPINONEDS4DDC4959Name"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack.NestedStack/FunctionDirectiveStack.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataFunctionDirectiveStackNestedStackFunctionDirectiveStackNestedStackResource1246A302"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AuthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAuthRolePolicy01567A5654"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/UnauthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUnauthRolePolicy01355B9DCF"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPool8BCCC199Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthUserPool8BCCC199Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputs.amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/reference-to-amplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputs.amplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DGraphQLUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DGraphQLUrl"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB78B4A571DestinationBucketArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB78B4A571DestinationBucketArn"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/data.NestedStack/data.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "data7552DF31"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/purchase-lambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "purchaselambdaServiceRole397E9B8B"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/purchase-lambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "purchaselambdaAED474B4"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function/amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACRef"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/function.NestedStack/function.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "function1351588B"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/definedFunctions": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "definedFunctions"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/awsAppsyncApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiId"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/awsAppsyncApiEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiEndpoint"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/awsAppsyncAuthenticationType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAuthenticationType"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/awsAppsyncRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncRegion"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/amplifyApiModelSchemaS3Uri": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyApiModelSchemaS3Uri"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/awsAppsyncAdditionalAuthenticationTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAdditionalAuthenticationTypes"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/amplify-backend-waltervargaspena-sandbox-b866b676a4/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "amplify-backend-waltervargaspena-sandbox-b866b676a4"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

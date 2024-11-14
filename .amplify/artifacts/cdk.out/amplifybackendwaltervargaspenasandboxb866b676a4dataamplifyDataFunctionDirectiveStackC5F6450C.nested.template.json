@@ -1,0 +1,518 @@
+{
+ "Description": "An auto-generated nested stack for the @function directive.",
+ "AWSTemplateFormatVersion": "2010-09-09",
+ "Conditions": {
+  "HasEnvironmentParameter": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      "NONE",
+      "NONE"
+     ]
+    }
+   ]
+  },
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Resources": {
+  "FnPurchaseLambdaDataSourceServiceRoleC37936DF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appsync.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "amplifyData"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/ServiceRole/Resource"
+   }
+  },
+  "FnPurchaseLambdaDataSourceServiceRoleDefaultPolicy649515EB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "FnPurchaseLambdaDataSourceServiceRoleDefaultPolicy649515EB",
+    "Roles": [
+     {
+      "Ref": "FnPurchaseLambdaDataSourceServiceRoleC37936DF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "FnPurchaseLambdaDataSource": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+    },
+    "LambdaConfig": {
+     "LambdaFunctionArn": {
+      "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn"
+     }
+    },
+    "Name": "FnPurchaseLambdaDataSource",
+    "ServiceRoleArn": {
+     "Fn::GetAtt": [
+      "FnPurchaseLambdaDataSourceServiceRoleC37936DF",
+      "Arn"
+     ]
+    },
+    "Type": "AWS_LAMBDA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/FnPurchaseLambdaDataSource/Resource"
+   }
+  },
+  "InvokeFnPurchaseLambdaDataSourceInvokeFnPurchaseLambdaDataSourceAppSyncFunction5BD92BA2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "FnPurchaseLambdaDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "InvokeFnPurchaseLambdaDataSource",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6a56d5f2ca9072d66e8492d5b73cf4ec4231325052b26e9bcf4c405832b75c10.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a20e304512b1fde77dc16ed9d5e0ed03817afcab629ce87ef11c99877b7b1e30.vtl"
+    }
+   },
+   "DependsOn": [
+    "FnPurchaseLambdaDataSource"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/InvokeFnPurchaseLambdaDataSource/InvokeFnPurchaseLambdaDataSource.AppSyncFunction"
+   }
+  },
+  "QuerypurchaseResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+    },
+    "FieldName": "purchase",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QueryPurchaseAuthFNQueryPurchaseAuthFNAppSyncFunction7E874DAC",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "InvokeFnPurchaseLambdaDataSourceInvokeFnPurchaseLambdaDataSourceAppSyncFunction5BD92BA2",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "## [Start] Stash resolver specific context.. **\n$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"purchase\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:aws:sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:aws:sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n{}\n## [End] Stash resolver specific context.. **"
+      ]
+     ]
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/387d5992f5fc03d05de27289457dcc374a84c42a889acb504aff1031047dde00.vtl"
+    },
+    "TypeName": "Query"
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/queryPurchaseResolver"
+   }
+  },
+  "QueryPurchaseAuthFNQueryPurchaseAuthFNAppSyncFunction7E874DAC": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPINONEDS4DDC4959Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryPurchaseAuthFN",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/46f293d51098baa905f2842f91164cbf9121ded892ccc3a3c86d0879c6ab7af0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/QueryPurchaseAuthFN/QueryPurchaseAuthFN.AppSyncFunction"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WNwY7CMAxEv4V76qWwWs5LESe0WrUfgEziVqatg+oEhKr++ypBHPb0PJrxzAbKr08oV/jQwrq+GPgC8w9pINcEtL2pWqm8OA7sxeBDzzPebvoUC/MJx4vDAwZsfJwspex/dYxi02PlpeUuTphbqlZqUj/caVoM4whz7Yecz/z1A9tnkq9rMbo9oyoFhe8Eo1vYR9tT2KPSYlJZXsxuE7Bj6d4ryViMeEdw1Y/7Zg3lDtarqzIXU5TAI0H94h86TRhhDAEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-backend-waltervargaspena-sandbox-b866b676a4/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Parameters": {
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4functionNestedStackfunctionNestedStackResource230F7B01Outputsamplifybackendwaltervargaspenasandboxb866b676a4functionpurchaselambda25594CACArn": {
+   "Type": "String"
+  },
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPI61ADFF5DApiId": {
+   "Type": "String"
+  },
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthauthenticatedUserRoleDC6990CDRef": {
+   "Type": "String"
+  },
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthunauthenticatedUserRoleADDC31A2Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4authNestedStackauthNestedStackResource76CFFAD9Outputsamplifybackendwaltervargaspenasandboxb866b676a4authamplifyAuthIdentityPoolB5D7A990Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifybackendwaltervargaspenasandboxb866b676a4dataamplifyDataGraphQLAPINONEDS4DDC4959Name": {
+   "Type": "String"
+  }
+ }
+}

@@ -1,0 +1,8 @@
+type Todo @model @auth(rules: [{allow: public, provider: iam}])
+{
+  content: String
+}
+
+type Query {
+  purchase(quantity: Int, productId: String): String @function(name: "FnPurchase") @auth(rules: [{allow: public, provider: iam}])
+}
