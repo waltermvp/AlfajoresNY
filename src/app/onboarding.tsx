@@ -34,14 +34,16 @@ const products = [
     price: 1500,
     id: 'prod_12346',
     body: 'Delicious fresh box of our standard alfajor. Contains 6',
-    image: '../../assets/IMG_0139.JPG',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Small Alfajores Box',
     price: 1300,
     id: 'prod_12347',
     body: 'Delicious fresh box of our largest alfajor. Contains 12',
-    image: '../../assets/IMG_0139.JPG',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   // Add more products as needed
 ];
