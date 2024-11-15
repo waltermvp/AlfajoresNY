@@ -1,3 +1,0 @@
-type Query {
-  purchase(quantity: Int, productId: String, zipCode: String): String @function(name: "FnPurchase") @auth(rules: [{allow: public, provider: iam}])
-}
