@@ -1,5 +1,5 @@
 import type { Handler } from 'aws-lambda';
-// const stripe = require('stripe')('sk_test_SwtYhjSmikelVkceYwWJcXCY00XzfdVhWO');
+const stripe = require('stripe')('sk_test_SwtYhjSmikelVkceYwWJcXCY00XzfdVhWO');
 
 //TODO: Use stripe to manage products
 
@@ -32,31 +32,31 @@ export const handler: Handler = async (event, context) => {
     return { error: `Product with ID ${productId} not found` };
   }
 
-  // const session = await stripe.checkout.sessions.create({
-  //   payment_method_types: ['card'],
-  //   shipping_address_collection: { allowed_countries: COUNTRY_CODE_ARRAY },
-  //   phone_number_collection: { enabled: true },
-  //   line_items: [
-  //     {
-  //       price_data: {
-  //         currency: 'usd',
-  //         product_data: {
-  //           name: product.name,
-  //         },
-  //         unit_amount: product.price, // price in cents
-  //       },
-  //       quantity: 1,
-  //     },
-  //   ],
-  //   mode: 'payment',
-  //   //TODO: Update urls and plug in env variables
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    shipping_address_collection: { allowed_countries: COUNTRY_CODE_ARRAY },
+    phone_number_collection: { enabled: true },
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: product.name,
+          },
+          unit_amount: product.price, // price in cents
+        },
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    //TODO: Update urls and plug in env variables
 
-  //   success_url: 'http://localhost:8081/success',
-  //   cancel_url: 'http://localhost:8081/cancel',
-  //   // cancel_url: `http://localhost:3000/#/order`,
-  // });
-  // const returnParams = { url: session.url, id: session.id };
-  // return returnParams;
-  const returnParams = { url: 'session.url', id: 'session.id' };
+    success_url: 'http://localhost:8081/success',
+    cancel_url: 'http://localhost:8081/cancel',
+    // cancel_url: `http://localhost:3000/#/order`,
+  });
+  const returnParams = { url: session.url, id: session.id };
   return returnParams;
+  // const returnParams = { url: 'session.url', id: 'session.id' };
+  // return returnParams;
 };
