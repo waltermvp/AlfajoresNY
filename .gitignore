@@ -24,4 +24,3 @@ expo-env.d.ts
 .amplify
 amplify_outputs*
 amplifyconfiguration*
-amplify_outputs.json
