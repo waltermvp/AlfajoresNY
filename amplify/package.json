@@ -1,6 +1,4 @@
 {
   "type": "module",
-  "dependencies": {
-    "stripe": "^17.2.1"
-  }
+  "dependencies": {}
 }
