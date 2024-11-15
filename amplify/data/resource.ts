@@ -29,11 +29,35 @@ const schema = a.schema({
     .handler(a.handler.function(validateZipCode))
     .authorization((allow) => [allow.guest()]),
 
-  // Todo: a
-  //   .model({
-  //     content: a.string(),
-  //   })
-  //   .authorization((allow) => [allow.guest()]),
+  Order: a
+    .model({
+      orderId: a.string(),
+      userId: a.string(),
+      productIds: a.string().array(),
+      totalAmount: a.float(),
+      status: a.string(),
+      createdAt: a.string(),
+    })
+    .authorization((allow) => [allow.guest()]),
+
+  Product: a
+    .model({
+      productId: a.string(),
+      name: a.string(),
+      description: a.string(),
+      price: a.float(),
+      stock: a.integer(),
+    })
+    .authorization((allow) => [allow.guest()]),
+
+  User: a
+    .model({
+      name: a.string(),
+      email: a.string(),
+      address: a.string(),
+      phoneNumber: a.string(),
+    })
+    .authorization((allow) => [allow.guest()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
