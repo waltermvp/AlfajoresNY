@@ -1,5 +1,7 @@
-import { loadStripe, RedirectToCheckoutServerOptions } from '@stripe/stripe-js';
-import { type Schema } from '../../../../backend/amplify/data/resource';
+import {
+  loadStripe,
+  type RedirectToCheckoutServerOptions,
+} from '@stripe/stripe-js';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { useRouter } from 'expo-router';
@@ -7,13 +9,14 @@ import React from 'react';
 import { Linking, ScrollView } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
+import { type PurchaseProps } from '@/api/posts/types';
 import { Alfajor } from '@/components/alfajor';
 import { Card } from '@/components/card';
 import { useIsFirstTime } from '@/core/hooks';
 import { FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
+
+import { type Schema } from '../../../../backend/amplify/data/resource';
 import outputs from '../amplify_outputs.json';
-import { PurchaseProps } from '@/api/posts/types';
-import { FlashList } from '@shopify/flash-list';
 
 Amplify.configure(outputs);
 
@@ -23,7 +26,8 @@ const products = [
     price: 2000,
     id: 'prod_12345',
     body: 'Delicious fresh box of our largest alfajor. Contains 4',
-    image: '../../assets/IMG_0139.JPG',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Alfajores Box',
