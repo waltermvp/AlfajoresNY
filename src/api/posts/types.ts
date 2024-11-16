@@ -3,6 +3,10 @@ export type PurchaseProps = {
   productId: string;
   zipCode: string;
 };
+export type CardPurchaseProps = {
+  quantity: number;
+  productId: string;
+};
 
 export type Product = {
   userId: number;
@@ -11,5 +15,7 @@ export type Product = {
   body: string;
   price: number;
   image: string;
-  onPress: ({ quantity, productId }: PurchaseProps) => void;
+  onPress: ({ quantity, productId }: CardPurchaseProps) => void;
+  loading: boolean;
+  // quantityChanged: (quantity: number) => void;
 };

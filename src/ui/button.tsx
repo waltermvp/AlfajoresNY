@@ -105,13 +105,12 @@ export const Button = React.forwardRef<View, Props>(
       textClassName = '',
       ...props
     },
-    ref
+    ref,
   ) => {
     const styles = React.useMemo(
       () => button({ variant, disabled, size }),
-      [variant, disabled, size]
+      [variant, disabled, size],
     );
-
     return (
       <Pressable
         disabled={disabled || loading}
@@ -127,6 +126,7 @@ export const Button = React.forwardRef<View, Props>(
             {loading ? (
               <ActivityIndicator
                 size="small"
+                color="black"
                 className={styles.indicator()}
                 testID={testID ? `${testID}-activity-indicator` : undefined}
               />
@@ -142,5 +142,5 @@ export const Button = React.forwardRef<View, Props>(
         )}
       </Pressable>
     );
-  }
+  },
 );

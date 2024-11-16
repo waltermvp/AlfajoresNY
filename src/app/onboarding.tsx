@@ -4,49 +4,22 @@ import {
 } from '@stripe/stripe-js';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
-import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Linking, ScrollView } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
-import { type PurchaseProps } from '@/api/posts/types';
+import { type CardPurchaseProps, type PurchaseProps } from '@/api/posts/types';
 import { Alfajor } from '@/components/alfajor';
 import { Card } from '@/components/card';
+import { ZipInput } from '@/components/zip-input';
 import { useIsFirstTime } from '@/core/hooks';
-import { FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
+import { FocusAwareStatusBar, SafeAreaView } from '@/ui';
+import { Text, View } from '@/ui';
 
-import { type Schema } from '../../../../backend/amplify/data/resource';
+import type { Schema } from '../../amplify/data/resource';
 import outputs from '../amplify_outputs.json';
 
 Amplify.configure(outputs);
-
-const products = [
-  {
-    name: 'Large Alfajores Box',
-    price: 2000,
-    id: 'prod_12345',
-    body: 'Delicious fresh box of our largest alfajor. Contains 4',
-    image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
-  }, // Price is in cents (e.g., $20.00)
-  {
-    name: 'Alfajores Box',
-    price: 1500,
-    id: 'prod_12346',
-    body: 'Delicious fresh box of our standard alfajor. Contains 6',
-    image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
-  }, // Price is in cents (e.g., $20.00)
-  {
-    name: 'Small Alfajores Box',
-    price: 1300,
-    id: 'prod_12347',
-    body: 'Delicious fresh box of our largest alfajor. Contains 12',
-    image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
-  }, // Price is in cents (e.g., $20.00)
-  // Add more products as needed
-];
 
 const extractUrl = (data: string) => {
   console.log('data', data);
@@ -60,32 +33,35 @@ const extractUrl = (data: string) => {
   return null;
 };
 
+// eslint-disable-next-line max-lines-per-function
 export default function Onboarding() {
   const [_, setIsFirstTime] = useIsFirstTime();
-  const router = useRouter();
+  // const router = useRouter();
   const clientA = generateClient<Schema>();
-  const [loading, setLoading] = React.useState(false);
+
+  // Zip Code
+  const [error, setError] = useState<undefined | string>();
+  const [zipCodeAccepted, setZipCodeAccepted] = useState<boolean>(false);
+  const [zipCode, setZipCode] = useState<string | undefined>();
+
+  const [quantity, setQuantity] = useState(1);
 
   // const isSmallScreen = useMediaQuery({ minWidth: 576 });
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
   const isLargeScreen = useMediaQuery({ minWidth: 992 });
 
-  const handleBuyNow = async ({
-    quantity,
-    productId,
-    zipCode,
-  }: PurchaseProps) => {
+  const handleBuyNow = async ({ productId, quantity }: CardPurchaseProps) => {
     console.log('quantity', quantity, productId);
-    setLoading(true);
-
+    if (!zipCode) {
+      setError('Please enter a valid zip code');
+      return;
+    }
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
       handlePurhcaseChrome({ quantity, productId, zipCode });
     } else {
       handlePurchaseSafari({ quantity, productId, zipCode });
     }
-
-    setLoading(false);
   };
 
   const handlePurchaseSafari = async ({
@@ -161,7 +137,6 @@ export default function Onboarding() {
         <FocusAwareStatusBar />
 
         <View className="w-full flex-1 justify-center">
-          {/* <Cover /> */}
           <Alfajor style={{ width: '75%', alignSelf: 'center' }} />
         </View>
         <View className="justify-end ">
@@ -172,7 +147,7 @@ export default function Onboarding() {
             Delicious Peruvian Alfajores, made with love in New York
           </Text>
 
-          <Text className="my-1 pt-6 text-left text-lg   color-white">
+          <Text className="my-1 pt-6 text-left text-lg color-white">
             🇵🇪 Peruvian Recipe
           </Text>
           <Text className="my-1 text-left text-lg   color-white">
@@ -186,6 +161,9 @@ export default function Onboarding() {
             💪 well maintained third-party libraries
           </Text> */}
         </View>
+        <View className="w-full flex-1 justify-center ">
+          <ZipInput />
+        </View>
 
         <View
           className="mt-6 flex flex-row"
@@ -193,21 +171,18 @@ export default function Onboarding() {
         >
           {products.map((product) => (
             <Card
-              loading={loading}
               key={product.id}
+              loading={false}
               onPress={handleBuyNow}
               userId={0}
               id={product.id}
               image={product.image}
-              // image={'./IMG_0139.JPG'}
-              // image="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=800&q=80"
               title={product.name}
               body={product.body}
               price={product.price}
             />
           ))}
         </View>
-
         <SafeAreaView className="mt-6 flex flex-row"></SafeAreaView>
       </View>
     </ScrollView>
@@ -232,3 +207,31 @@ function parseData(input: string): ParsedData | null {
 
   return null;
 }
+
+const products = [
+  {
+    name: 'Large Alfajores Box',
+    price: 2000,
+    id: 'prod_12345',
+    body: 'Delicious fresh box of our largest alfajor. Contains 4',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+  }, // Price is in cents (e.g., $20.00)
+  {
+    name: 'Alfajores Box',
+    price: 1500,
+    id: 'prod_12346',
+    body: 'Delicious fresh box of our standard alfajor. Contains 6',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+  }, // Price is in cents (e.g., $20.00)
+  {
+    name: 'Small Alfajores Box',
+    price: 1300,
+    id: 'prod_12347',
+    body: 'Delicious fresh box of our largest alfajor. Contains 12',
+    image:
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+  }, // Price is in cents (e.g., $20.00)
+  // Add more products as needed
+];
