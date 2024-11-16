@@ -23,7 +23,7 @@ const schema = a.schema({
   validateZipCode: a
     .query()
     .arguments({
-      string: a.integer(),
+      zipCode: a.string(),
     })
     .returns(a.string())
     .handler(a.handler.function(validateZipCode))
