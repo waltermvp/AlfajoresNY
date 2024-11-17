@@ -1,7 +1,8 @@
 import { a, type ClientSchema, defineData } from '@aws-amplify/backend';
 
 import { purchase } from '../functions/purchase/resource';
-import { validateZipCode } from '../functions/validateZipCode/resource';
+import { validateZipCode } from '../functions/validate-zip-code/resource';
+// import { validateZipCode } from '../functions/validateZipCode/resource';
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -10,6 +11,15 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
+  validateZipCode: a
+    .query()
+    .arguments({
+      zipCode: a.string(),
+    })
+    .returns(a.string())
+    .handler(a.handler.function(validateZipCode))
+    .authorization((allow) => [allow.guest()]),
+
   purchase: a
     .query()
     .arguments({
@@ -20,44 +30,35 @@ const schema = a.schema({
     .handler(a.handler.function(purchase))
     .authorization((allow) => [allow.guest()]),
 
-  validateZipCode: a
-    .query()
-    .arguments({
-      zipCode: a.string(),
-    })
-    .returns(a.string())
-    .handler(a.handler.function(validateZipCode))
-    .authorization((allow) => [allow.guest()]),
+  // Order: a
+  //   .model({
+  //     orderId: a.string(),
+  //     userId: a.string(),
+  //     productIds: a.string().array(),
+  //     totalAmount: a.float(),
+  //     status: a.string(),
+  //     createdAt: a.string(),
+  //   })
+  //   .authorization((allow) => [allow.guest()]),
 
-  Order: a
-    .model({
-      orderId: a.string(),
-      userId: a.string(),
-      productIds: a.string().array(),
-      totalAmount: a.float(),
-      status: a.string(),
-      createdAt: a.string(),
-    })
-    .authorization((allow) => [allow.guest()]),
+  // Product: a
+  //   .model({
+  //     productId: a.string(),
+  //     name: a.string(),
+  //     description: a.string(),
+  //     price: a.float(),
+  //     stock: a.integer(),
+  //   })
+  //   .authorization((allow) => [allow.guest()]),
 
-  Product: a
-    .model({
-      productId: a.string(),
-      name: a.string(),
-      description: a.string(),
-      price: a.float(),
-      stock: a.integer(),
-    })
-    .authorization((allow) => [allow.guest()]),
-
-  User: a
-    .model({
-      name: a.string(),
-      email: a.string(),
-      address: a.string(),
-      phoneNumber: a.string(),
-    })
-    .authorization((allow) => [allow.guest()]),
+  // User: a
+  //   .model({
+  //     name: a.string(),
+  //     email: a.string(),
+  //     address: a.string(),
+  //     phoneNumber: a.string(),
+  //   })
+  //   .authorization((allow) => [allow.guest()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

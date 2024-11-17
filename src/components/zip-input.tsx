@@ -2,17 +2,16 @@ import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import React, { useEffect, useState } from 'react';
 
-import { Button, Input, type OptionType, View } from '@/ui';
+import { Button, Input, View } from '@/ui';
 
 import type { Schema } from '../../amplify/data/resource';
 import outputs from '../amplify_outputs.json';
 import { Title } from './title';
-
 Amplify.configure(outputs);
 
 export const ZipInput = () => {
   const amplifyClient = generateClient<Schema>();
-
+  console.log('amplifyClient.queries', amplifyClient.queries);
   const [zipCode, setZipcode] = React.useState<string | undefined>();
   const [error, setError] = useState<undefined | string>();
   const [checkingZip, setCheckingZip] = useState(false);
@@ -24,12 +23,13 @@ export const ZipInput = () => {
       return;
     }
     setCheckingZip(true);
-
+    console.log('will validate: ', zipCode);
     try {
       const result = await amplifyClient.queries.validateZipCode({
-        zipCode: zipCode,
+        zipCode,
       });
-      console.log(result, 'result');
+      const { success } = JSON.parse(result.data ?? '{}');
+      console.log(result, 'result', success);
       // setTimeout(() => {}, 2000);
       // setCheckingZip(false);
     } catch (error) {
@@ -58,7 +58,6 @@ export const ZipInput = () => {
         text="Please enter your zip code to make sure we can deliver to you."
         color="white"
       />
-
       <View>
         <Input
           label="Zip Code"
@@ -78,8 +77,3 @@ export const ZipInput = () => {
     </>
   );
 };
-const options: OptionType[] = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
