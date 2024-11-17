@@ -9,5 +9,5 @@ export const handler: Handler = async (event, context) => {
     return { error: `Zipcode ${zipCode} not found` };
   }
   const returnParams = { success: true };
-  return JSON.stringify(returnParams);
+  return returnParams;
 };
