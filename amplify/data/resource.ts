@@ -1,7 +1,9 @@
 import { a, type ClientSchema, defineData } from '@aws-amplify/backend';
 
 import { purchase } from '../functions/purchase/resource';
-import { validateZipCode } from '../functions/validate-zip-code/resource';
+import { sayHello } from '../functions/say-hello/resource';
+import { validate } from '../functions/validate/resource';
+
 // import { validateZipCode } from '../functions/validateZipCode/resource';
 
 /*== STEP 1 ===============================================================
@@ -11,13 +13,20 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  validateZipCode: a
+  sayHello: a
+    .query()
+    .arguments({
+      name: a.string(),
+    })
+    .returns(a.string())
+    .handler(a.handler.function(sayHello)),
+  validate: a
     .query()
     .arguments({
       zipCode: a.string(),
     })
     .returns(a.string())
-    .handler(a.handler.function(validateZipCode))
+    .handler(a.handler.function(validate))
     .authorization((allow) => [allow.guest()]),
 
   purchase: a
