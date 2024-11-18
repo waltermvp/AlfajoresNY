@@ -216,7 +216,7 @@ const products = [
     id: 'prod_12345',
     body: 'Delicious fresh box of our largest alfajor. Contains 4',
     image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWRxZmluYjB3cXFpczMtbWFpLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy03bjF6a3R0NWY5cmMiLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Alfajores Box',
@@ -224,7 +224,7 @@ const products = [
     id: 'prod_12346',
     body: 'Delicious fresh box of our standard alfajor. Contains 6',
     image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWRxZmluYjB3cXFpczMtbWFpLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy03bjF6a3R0NWY5cmMiLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   {
     name: 'Small Alfajores Box',
@@ -232,7 +232,7 @@ const products = [
     id: 'prod_12347',
     body: 'Delicious fresh box of our largest alfajor. Contains 12',
     image:
-      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQyemEzeHNjNjV2Yy1tYWluLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy1jaG9nN2NncjJhcGciLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
+      'https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWRxZmluYjB3cXFpczMtbWFpLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy03bjF6a3R0NWY5cmMiLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ==',
   }, // Price is in cents (e.g., $20.00)
   // Add more products as needed
 ];
