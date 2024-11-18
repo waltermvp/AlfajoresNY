@@ -7,6 +7,6 @@ export const handler: Handler = async (event, _context) => {
   if (!ZIP_CODE_ARRAY.includes(zipCode)) {
     return { error: `Zipcode ${zipCode} not found` };
   }
-  const returnParams = { success: true };
-  return returnParams;
+  // const returnParams = { success: true };
+  return 'returnParams';
 };
