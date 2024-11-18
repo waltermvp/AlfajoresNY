@@ -38,6 +38,7 @@ export default function Onboarding() {
   const [_, setIsFirstTime] = useIsFirstTime();
   // const router = useRouter();
   const clientA = generateClient<Schema>();
+  console.log('clientA.queries', clientA.queries);
 
   // Zip Code
   const [error, setError] = useState<undefined | string>();
