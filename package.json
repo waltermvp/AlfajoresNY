@@ -37,7 +37,7 @@
     "test:watch": "pnpm run test --watch",
     "install-maestro": "curl -Ls 'https://get.maestro.mobile.dev' | bash",
     "e2e-test": "maestro test .maestro/ -e APP_ID=com.obytes.development",
-    "generate": "npx ampx generate outputs --app-id d2wpgngwe2gow4 --branch main"
+    "generate": "npx ampx generate outputs --app-id dqfinb0wqqis3 --branch main"
   },
   "dependencies": {
     "@expo/metro-runtime": "^3.2.3",
