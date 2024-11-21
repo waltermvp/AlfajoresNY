@@ -38,14 +38,11 @@ export default function Onboarding() {
   const [_, setIsFirstTime] = useIsFirstTime();
   // const router = useRouter();
   const clientA = generateClient<Schema>();
-  console.log('clientA.queries', clientA.queries);
 
   // Zip Code
   const [error, setError] = useState<undefined | string>();
   const [zipCodeAccepted, setZipCodeAccepted] = useState<boolean>(false);
   const [zipCode, setZipCode] = useState<string | undefined>();
-
-  const [quantity, setQuantity] = useState(1);
 
   // const isSmallScreen = useMediaQuery({ minWidth: 576 });
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
@@ -162,13 +159,29 @@ export default function Onboarding() {
             💪 well maintained third-party libraries
           </Text> */}
         </View>
-        <View className="w-full flex-1 justify-center ">
-          <ZipInput />
-        </View>
-
+        {!zipCodeAccepted ? (
+          <View className="justify-left flex-1">
+            <ZipInput
+              callBack={({ success, zip }) => {
+                console.log('success', success);
+                setZipCodeAccepted(success);
+                setZipCode(zip);
+              }}
+            />
+          </View>
+        ) : (
+          <Text className="my-3 text-left text-5xl font-bold   color-white">
+            Great news we can deliver to your area!{' '}
+          </Text>
+        )}
         <View
           className="mt-6 flex flex-row"
-          style={{ flexDirection: !isLargeScreen ? 'column' : 'row' }}
+          style={{
+            flexDirection: !isLargeScreen ? 'column' : 'row',
+            opacity: zipCodeAccepted ? 1 : 0.4, // Slightly more transparent
+            filter: zipCodeAccepted ? 'none' : 'grayscale(50%)', // Add grayscale effect
+            pointerEvents: zipCodeAccepted ? 'auto' : 'none', // Prevent interactions when disabled
+          }}
         >
           {products.map((product) => (
             <Card
