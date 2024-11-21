@@ -1,20 +1,15 @@
-import { loadStripe, RedirectToCheckoutServerOptions } from '@stripe/stripe-js';
-import { type Schema } from '../../../../backend/amplify/data/resource';
 import { Amplify } from 'aws-amplify';
-import { generateClient } from 'aws-amplify/api';
 import { Link, useRouter } from 'expo-router';
 import React from 'react';
-import { Linking, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
-import { Alfajor } from '@/components/alfajor';
-import { Card } from '@/components/card';
+import { type PurchaseProps } from '@/api/posts/types';
+import Success from '@/components/success';
 import { useIsFirstTime } from '@/core/hooks';
 import { Button, FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
-import outputs from '../amplify_outputs.json';
-import { PurchaseProps } from '@/api/posts/types';
-import { Image } from 'expo-image';
-import Success from '@/components/success';
+
+import outputs from '../../amplify_outputs.json';
 
 Amplify.configure(outputs);
 

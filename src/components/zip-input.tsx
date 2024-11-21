@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input, View } from '@/ui';
 
 import type { Schema } from '../../amplify/data/resource';
-import outputs from '../amplify_outputs.json';
+import outputs from '../../amplify_outputs.json';
 import { Title } from './title';
 
 Amplify.configure(outputs);

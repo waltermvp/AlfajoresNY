@@ -17,7 +17,7 @@ import { FocusAwareStatusBar, SafeAreaView } from '@/ui';
 import { Text, View } from '@/ui';
 
 import type { Schema } from '../../amplify/data/resource';
-import outputs from '../amplify_outputs.json';
+import outputs from '../../amplify_outputs.json';
 
 Amplify.configure(outputs);
 
