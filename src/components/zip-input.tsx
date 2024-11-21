@@ -10,7 +10,7 @@ import { Title } from './title';
 
 Amplify.configure(outputs);
 export type ZipInputProps = {
-  callBack: ({ success }: { success: boolean }) => void;
+  callBack: ({ success }: { success: boolean; zip?: string }) => void;
 };
 
 // eslint-disable-next-line max-lines-per-function
@@ -39,7 +39,7 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
         callBack({ success });
       } else {
         setError(undefined);
-        callBack({ success });
+        callBack({ success, zip: zipCode });
       }
       setCheckingZip(false);
     } catch (error) {
