@@ -5,8 +5,13 @@ export const handler: Handler = async (event, _context) => {
   const { zipCode } = event.arguments;
 
   if (!ZIP_CODE_ARRAY.includes(zipCode)) {
-    return { error: `Zipcode ${zipCode} not found` };
+    return {
+      success: false,
+      error: `Zipcode ${zipCode} not found`,
+    };
   }
-  // const returnParams = { success: true };
-  return 'returnParams';
+  const returnParams = {
+    success: true,
+  };
+  return returnParams;
 };

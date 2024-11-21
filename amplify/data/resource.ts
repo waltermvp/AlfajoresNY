@@ -27,7 +27,12 @@ const schema = a.schema({
     .arguments({
       zipCode: a.string(),
     })
-    .returns(a.string())
+    .returns(
+      a.customType({
+        success: a.boolean().required(),
+        error: a.string(),
+      }),
+    )
     .handler(a.handler.function(validate))
     .authorization((allow) => [allow.guest()]),
 
