@@ -42,7 +42,13 @@ const schema = a.schema({
       quantity: a.integer(),
       productId: a.string(),
     })
-    .returns(a.string())
+    .returns(
+      a.customType({
+        url: a.string(),
+        id: a.string(),
+        error: a.string(),
+      }),
+    )
     .handler(a.handler.function(purchase))
     .authorization((allow) => [allow.guest()]),
 

@@ -5,7 +5,7 @@ import {
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import React, { useState } from 'react';
-import { Linking, ScrollView } from 'react-native';
+import { Linking, ScrollView, StyleSheet } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
 import { type CardPurchaseProps, type PurchaseProps } from '@/api/posts/types';
@@ -20,18 +20,6 @@ import type { Schema } from '../../amplify/data/resource';
 import outputs from '../../amplify_outputs.json';
 
 Amplify.configure(outputs);
-
-const extractUrl = (data: string) => {
-  console.log('data', data);
-  // Remove the curly braces and match the URL
-  const cleanData = data.replace(/[{}]/g, ''); // Remove the curly braces
-  const match = cleanData.match(/url=(.*)/); // Extract URL after 'url='
-  const match2 = cleanData.match(/id=(.*)/); // Extract URL after 'url='
-  if (match && match[1] && match2 && match2[1]) {
-    return { url: match[1].trim(), id: match2[1].trim() }; // Return the extracted URL without spaces
-  }
-  return null;
-};
 
 // eslint-disable-next-line max-lines-per-function
 export default function Onboarding() {
@@ -67,7 +55,7 @@ export default function Onboarding() {
     productId,
   }: PurchaseProps) => {
     const stripe = await loadStripe(
-      'pk_test_tDOoOWsP30M63V52kT4Gun1G005AcuotiJ',
+      'pk_test_51FQ3zILbRVJMADhd041XnBP5OX1WBVjwH7Nl7wIAssk6WKIxiULFqi3OrQDaDaY00eXx1MAJ9Mju8JbqFJNDTY5q00rpaGrLVb',
     );
 
     console.log(quantity, 'passing to quantity purchase');
@@ -84,16 +72,16 @@ export default function Onboarding() {
       return;
     }
 
-    const data = extractUrl(response.data);
+    const data = response.data;
     console.log('data', data);
 
-    if (!data) {
+    if (!data || !data.url) {
       console.error('No data found');
       return;
     }
 
     const stripeProps: RedirectToCheckoutServerOptions = {
-      sessionId: data.id,
+      sessionId: data.id ?? '',
     };
 
     stripe
@@ -114,7 +102,7 @@ export default function Onboarding() {
     console.log('result.data', result.data);
 
     if (result.data) {
-      const parsedData = parseData(result.data);
+      const parsedData = result.data;
 
       if (parsedData?.url) {
         console.log('URL:', parsedData.url);
@@ -176,12 +164,14 @@ export default function Onboarding() {
         )}
         <View
           className="mt-6 flex flex-row"
-          style={{
-            flexDirection: !isLargeScreen ? 'column' : 'row',
-            opacity: zipCodeAccepted ? 1 : 0.4, // Slightly more transparent
-            filter: zipCodeAccepted ? 'none' : 'grayscale(50%)', // Add grayscale effect
-            pointerEvents: zipCodeAccepted ? 'auto' : 'none', // Prevent interactions when disabled
-          }}
+          style={[
+            {
+              flexDirection: !isLargeScreen ? 'column' : 'row',
+              opacity: zipCodeAccepted ? 1 : 0.4, // Slightly more transparent
+              pointerEvents: zipCodeAccepted ? 'auto' : 'none', // Prevent interactions when disabled
+            },
+            !zipCodeAccepted && styles.grayscaleEffect, // Apply grayscale effect style
+          ]}
         >
           {products.map((product) => (
             <Card
@@ -202,26 +192,15 @@ export default function Onboarding() {
     </ScrollView>
   );
 }
-
-interface ParsedData {
-  url: string;
-  id: string;
-}
-
-function parseData(input: string): ParsedData | null {
-  const regex = /{url=(.*), id=(.*)}/;
-  const match = input.match(regex);
-
-  if (match) {
-    return {
-      url: match[1],
-      id: match[2],
-    };
-  }
-
-  return null;
-}
-
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 24,
+    flexDirection: 'row',
+  },
+  grayscaleEffect: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Add a subtle overlay for a grayscale look
+  },
+});
 const products = [
   {
     name: 'Large Alfajores Box',
