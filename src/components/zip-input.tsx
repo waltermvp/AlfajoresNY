@@ -9,10 +9,13 @@ import outputs from '../../amplify_outputs.json';
 import { Title } from './title';
 
 Amplify.configure(outputs);
+export type ZipInputProps = {
+  callBack: ({ success }: { success: boolean }) => void;
+};
 
-export const ZipInput = () => {
+// eslint-disable-next-line max-lines-per-function
+export const ZipInput = ({ callBack }: ZipInputProps) => {
   const amplifyClient = generateClient<Schema>();
-  console.log('amplifyClient.queries', amplifyClient.queries);
   const [zipCode, setZipcode] = React.useState<string | undefined>();
   const [error, setError] = useState<undefined | string>();
   const [checkingZip, setCheckingZip] = useState(false);
@@ -24,18 +27,25 @@ export const ZipInput = () => {
       return;
     }
     setCheckingZip(true);
-    console.log('will validate: ', zipCode);
     try {
-      const result = await amplifyClient.queries.validateZipCode({
+      const result = await amplifyClient.queries.validate({
         zipCode,
       });
-      const { success } = JSON.parse(result.data ?? '{}');
-      console.log(result, 'result', success);
-      // setTimeout(() => {}, 2000);
-      // setCheckingZip(false);
+      const success = result.data?.success ?? false;
+      console.log('success', success);
+      if (!success) {
+        console.log('setting error');
+        setError('Sorry, we do not deliver to your area');
+        callBack({ success });
+      } else {
+        setError(undefined);
+        callBack({ success });
+      }
+      setCheckingZip(false);
     } catch (error) {
-      console.log(error, 'error');
-      // setCheckingZip(false);
+      setError('Sorry, we do not deliver to your area');
+
+      setCheckingZip(false);
     }
   }
 
@@ -63,6 +73,7 @@ export const ZipInput = () => {
         <Input
           label="Zip Code"
           placeholder="enter your Zip Code"
+          error={error}
           onChangeText={setZipcode}
         />
         {/* <Input label="Error" error="This is a message error" />
