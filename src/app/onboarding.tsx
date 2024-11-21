@@ -54,6 +54,7 @@ export default function Onboarding() {
     quantity,
     productId,
   }: PurchaseProps) => {
+    console.log('handlePurchaseSafari', quantity, productId);
     const stripe = await loadStripe(
       'pk_test_51FQ3zILbRVJMADhd041XnBP5OX1WBVjwH7Nl7wIAssk6WKIxiULFqi3OrQDaDaY00eXx1MAJ9Mju8JbqFJNDTY5q00rpaGrLVb',
     );

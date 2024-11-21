@@ -19,7 +19,7 @@ const products = {
 const COUNTRY_CODE_ARRAY = ['US'];
 
 export const handler: Handler = async (event, context) => {
-  const stripe = require('stripe')(event.env.STRIPE_SECRET_KEY);
+  const stripe = require('stripe')(event.env.STRIPE_SECRET);
 
   console.log('context', context);
   const { productId, quantity } = event.arguments;
