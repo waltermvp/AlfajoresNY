@@ -40,6 +40,7 @@ export default function Onboarding() {
             color={'#28a745'}
             style={{
               width: '50%',
+              maxWidth: 420,
               alignSelf: 'center',
             }}
           />

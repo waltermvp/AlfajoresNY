@@ -29,9 +29,7 @@ export default function Onboarding() {
 
   // Zip Code
   const [error, setError] = useState<undefined | string>();
-  const [zipCodeAccepted, setZipCodeAccepted] = useState<boolean>(false);
   const [zipCode, setZipCode] = useState<string | undefined>();
-
   // const isSmallScreen = useMediaQuery({ minWidth: 576 });
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
   const isLargeScreen = useMediaQuery({ minWidth: 992 });
@@ -148,30 +146,24 @@ export default function Onboarding() {
             💪 well maintained third-party libraries
           </Text> */}
         </View>
-        {!zipCodeAccepted ? (
-          <View className="justify-left flex-1">
-            <ZipInput
-              callBack={({ success, zip }) => {
-                console.log('success', success);
-                setZipCodeAccepted(success);
+        <View className="justify-left mb-2 ">
+          <ZipInput
+            callBack={({ success, zip }) => {
+              if (success) {
                 setZipCode(zip);
-              }}
-            />
-          </View>
-        ) : (
-          <Text className="my-3 text-left text-5xl font-bold   color-white">
-            Great news we can deliver to your area!{' '}
-          </Text>
-        )}
+              }
+            }}
+          />
+        </View>
         <View
-          className="mt-6 flex flex-row"
+          className="mt-1 flex flex-row"
           style={[
             {
               flexDirection: !isLargeScreen ? 'column' : 'row',
-              opacity: zipCodeAccepted ? 1 : 0.4, // Slightly more transparent
-              pointerEvents: zipCodeAccepted ? 'auto' : 'none', // Prevent interactions when disabled
+              opacity: zipCode ? 1 : 0.4, // Slightly more transparent
+              pointerEvents: zipCode ? 'auto' : 'none', // Prevent interactions when disabled
             },
-            !zipCodeAccepted && styles.grayscaleEffect, // Apply grayscale effect style
+            !zipCode && styles.grayscaleEffect, // Apply grayscale effect style
           ]}
         >
           {products.map((product) => (
