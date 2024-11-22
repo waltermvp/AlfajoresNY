@@ -29,10 +29,7 @@ export default function Onboarding() {
 
   // Zip Code
   const [error, setError] = useState<undefined | string>();
-  const [zipCode, setZipCode] = useState<string | undefined>(
-    localStorage.getItem('zipCode') ?? undefined,
-  );
-  console.log('localStorage', localStorage.getItem('zipCode'));
+  const [zipCode, setZipCode] = useState<string | undefined>();
   // const isSmallScreen = useMediaQuery({ minWidth: 576 });
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
   const isLargeScreen = useMediaQuery({ minWidth: 992 });
@@ -149,26 +146,17 @@ export default function Onboarding() {
             💪 well maintained third-party libraries
           </Text> */}
         </View>
-        {!zipCode ? (
-          <View className="justify-left flex-1">
-            <ZipInput
-              callBack={({ success, zip }) => {
-                console.log('success', success);
-                if (zip) {
-                  localStorage.setItem('zipCode', zip);
-                }
-
+        <View className="justify-left mb-2 ">
+          <ZipInput
+            callBack={({ success, zip }) => {
+              if (success) {
                 setZipCode(zip);
-              }}
-            />
-          </View>
-        ) : (
-          <Text className="my-3 px-3 text-center text-5xl font-bold   color-white">
-            Great news we deliver to your area!
-          </Text>
-        )}
+              }
+            }}
+          />
+        </View>
         <View
-          className="mt-6 flex flex-row"
+          className="mt-1 flex flex-row"
           style={[
             {
               flexDirection: !isLargeScreen ? 'column' : 'row',
