@@ -1,5 +1,5 @@
 import type { Handler } from 'aws-lambda';
-
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 //TODO: Use stripe to manage products
 
 // This could be a database of products or static product data
@@ -18,10 +18,7 @@ const products = {
 // }
 const COUNTRY_CODE_ARRAY = ['US'];
 
-export const handler: Handler = async (event, context) => {
-  const stripe = require('stripe')(event.env.STRIPE_SECRET);
-
-  console.log('context', context);
+export const handler: Handler = async (event, _context) => {
   const { productId, quantity } = event.arguments;
 
   console.log('productId', productId);
