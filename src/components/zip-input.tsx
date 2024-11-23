@@ -22,6 +22,7 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
     localStorage.getItem('zipCode') ?? undefined,
   );
   const [error, setError] = useState<undefined | string>();
+  const [zipText, setZipText] = useState<string | undefined>();
   const [checkingZip, setCheckingZip] = useState(false);
   const buttonEnabled = error ? true : false;
 
@@ -36,12 +37,15 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
         zipCode,
       });
       const success = result.data?.success ?? false;
+
       if (!success) {
         setError('Sorry, we do not deliver to your area');
         callBack({ success });
         setZipCodeResult(undefined);
+        setZipText(undefined);
       } else {
         localStorage.setItem(ZIP_STORAGE_KEY, zipCode);
+        setZipText(result.data?.city, result.data?.name, zipCode);
         setZipCodeResult(zipCode);
         setError(undefined);
         callBack({ success, zip: zipCode });
@@ -50,6 +54,8 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
     } catch (error) {
       setError('Sorry, we do not deliver to your area');
       localStorage.removeItem(ZIP_STORAGE_KEY);
+      setZipText(undefined);
+
       setCheckingZip(false);
     }
   }
@@ -125,7 +131,7 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
             x
           </Text>
           <Text className="my-3 px-3 text-center text-5xl font-bold   color-white">
-            Great news we deliver to your area! {zipCodeResult}
+            Great news we deliver to your area! {zipText}
           </Text>
         </View>
       )}
