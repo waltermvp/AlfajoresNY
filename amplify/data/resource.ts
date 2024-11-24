@@ -30,8 +30,9 @@ const schema = a.schema({
     .returns(
       a.customType({
         success: a.boolean().required(),
-        name: a.boolean(),
-        city: a.boolean(),
+        name: a.string(),
+        city: a.string(),
+        zip: a.string(),
         error: a.string(),
       }),
     )

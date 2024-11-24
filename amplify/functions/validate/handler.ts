@@ -24,6 +24,8 @@ export const handler: Handler = async (event, _context) => {
   const { zipCode } = event.arguments;
 
   if (!ZIP_CODE_ARRAY.includes(zipCode)) {
+    console.log('Zipcode not found 1');
+
     return {
       success: false,
       error: `Zipcode ${zipCode} not found`,
@@ -31,19 +33,22 @@ export const handler: Handler = async (event, _context) => {
   }
 
   const zipObject = ZIP_ARRAY.find(
-    (zipObject) => zipObject.ZipCode === zipCode,
+    (zipObject) => zipObject.ZipCode.toString() === zipCode,
   );
   if (!zipObject) {
+    console.log('Zipcode not found 2');
     return {
       success: false,
       error: `Zipcode ${zipCode} not found`,
     };
   }
-
+  console.log(zipObject, 'zipObject');
   const returnParams = {
     success: true,
     name: zipObject.StateName,
     city: zipObject.City,
+    zip: zipCode,
   };
+  console.log(returnParams, 'returnParams');
   return returnParams;
 };
