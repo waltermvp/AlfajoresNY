@@ -1,9 +1,10 @@
 import type { Handler } from 'aws-lambda';
 
+import SupportedZips from './supportedZips.json';
 import ZipObjects from './US.json';
 
 const ZIP_ARRAY: ZipObject[] = ZipObjects as ZipObject[];
-const ZIP_CODE_ARRAY = ['11001', '11356', '11368', '11709'];
+const ZIP_CODE_ARRAY = SupportedZips;
 
 type ZipObject = {
   Country: string;
@@ -24,8 +25,6 @@ export const handler: Handler = async (event, _context) => {
   const { zipCode } = event.arguments;
 
   if (!ZIP_CODE_ARRAY.includes(zipCode)) {
-    console.log('Zipcode not found 1');
-
     return {
       success: false,
       error: `Zipcode ${zipCode} not found`,
@@ -36,13 +35,11 @@ export const handler: Handler = async (event, _context) => {
     (zipObject) => zipObject.ZipCode.toString() === zipCode,
   );
   if (!zipObject) {
-    console.log('Zipcode not found 2');
     return {
       success: false,
       error: `Zipcode ${zipCode} not found`,
     };
   }
-  console.log(zipObject, 'zipObject');
   const returnParams = {
     success: true,
     name: zipObject.StateName,
