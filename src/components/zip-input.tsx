@@ -101,7 +101,8 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
       callBack({ success: true, zip: zipCodeResult?.zip });
     }
     updatecall();
-  }, [zipCodeResult, callBack]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callBack]);
 
   console.log(zipCodeResult, 'zipCodeResult');
   return (
