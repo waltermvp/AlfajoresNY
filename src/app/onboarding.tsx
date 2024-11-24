@@ -12,7 +12,6 @@ import { type CardPurchaseProps, type PurchaseProps } from '@/api/posts/types';
 import { Alfajor } from '@/components/alfajor';
 import { Card } from '@/components/card';
 import { ZipInput } from '@/components/zip-input';
-import { useIsFirstTime } from '@/core/hooks';
 import { FocusAwareStatusBar, SafeAreaView } from '@/ui';
 import { Text, View } from '@/ui';
 
@@ -23,7 +22,6 @@ Amplify.configure(outputs);
 
 // eslint-disable-next-line max-lines-per-function
 export default function Onboarding() {
-  const [_, setIsFirstTime] = useIsFirstTime();
   // const router = useRouter();
   const clientA = generateClient<Schema>();
 
