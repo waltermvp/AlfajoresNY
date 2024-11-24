@@ -1,6 +1,6 @@
 import type { Handler } from 'aws-lambda';
 
-import SupportedZips from './supportedZips.json';
+import SupportedZips from './final_trimmed_zip_codes.json';
 import ZipObjects from './US.json';
 
 const ZIP_ARRAY: ZipObject[] = ZipObjects as ZipObject[];

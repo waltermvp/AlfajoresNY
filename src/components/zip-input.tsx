@@ -2,6 +2,7 @@ import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import React, { useEffect, useState } from 'react';
 
+import { useIsFirstTime } from '@/core';
 import { Button, colors, Input, Text, View } from '@/ui';
 
 import { type Schema } from '../../amplify/data/resource';
@@ -13,9 +14,16 @@ Amplify.configure(outputs);
 export type ZipInputProps = {
   callBack: ({ success }: { success: boolean; zip?: string }) => void;
 };
+interface ZipData {
+  zip: string;
+  city: string;
+  name: string;
+}
 
 // eslint-disable-next-line max-lines-per-function
 export const ZipInput = ({ callBack }: ZipInputProps) => {
+  const [isFirstTime, setIsFirstTime] = useIsFirstTime();
+
   const amplifyClient = generateClient<Schema>();
   const [zipCode, setZipcode] = React.useState<string | undefined>();
   const [zipCodeResult, setZipCodeResult] = React.useState<ZipData | undefined>(
@@ -60,12 +68,6 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
     setZipcode(undefined);
   }
 
-  interface ZipData {
-    zip: string;
-    city: string;
-    name: string;
-  }
-
   function setZip(data: ZipData) {
     localStorage.setItem(ZIP_STORAGE_KEY, JSON.stringify(data));
     setZipCodeResult(data);
@@ -82,9 +84,13 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
         return false;
       }
     }
+    if (isFirstTime) {
+      setIsFirstTime(false);
+      return;
+    }
 
     validateZipCodeThenUpdateError();
-  }, [zipCode, setError]);
+  }, [zipCode, setError, isFirstTime, setIsFirstTime]);
 
   useEffect(() => {
     function updatecall() {
