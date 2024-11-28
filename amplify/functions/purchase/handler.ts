@@ -50,11 +50,10 @@ export const handler: Handler = async (event, _context) => {
     //TODO: Update urls and plug in env variables
 
     success_url: 'http://localhost:8081/success',
-    cancel_url: 'http://localhost:8081/cancel',
+    // cancel_url: 'http://localhost:8081/cancel',
+    cancel_url: 'http://localhost:8081',
     // cancel_url: `http://localhost:3000/#/order`,
   });
   const returnParams = { url: session.url, id: session.id };
   return returnParams;
-  // const returnParams = { url: 'session.url', id: 'session.id' };
-  // return returnParams;
 };
