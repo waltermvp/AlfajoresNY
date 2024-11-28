@@ -16,6 +16,5 @@ export type Product = {
   price: number;
   image: string;
   onPress: ({ quantity, productId }: CardPurchaseProps) => void;
-  loading: boolean;
   // quantityChanged: (quantity: number) => void;
 };

@@ -9,8 +9,8 @@ import { Linking, ScrollView, StyleSheet } from 'react-native';
 import { useMediaQuery } from 'react-responsive';
 
 import { type CardPurchaseProps, type PurchaseProps } from '@/api/posts/types';
-import { Alfajor } from '@/components/alfajor';
 import { Card } from '@/components/card';
+import Hero from '@/components/hero';
 import { ZipInput } from '@/components/zip-input';
 import { FocusAwareStatusBar, SafeAreaView } from '@/ui';
 import { Text, View } from '@/ui';
@@ -26,7 +26,7 @@ export default function Onboarding() {
   const clientA = generateClient<Schema>();
 
   // Zip Code
-  const [error, setError] = useState<undefined | string>();
+  const [zipError, setZipError] = useState<undefined | string>();
   const [zipCode, setZipCode] = useState<string | undefined>();
   // const isSmallScreen = useMediaQuery({ minWidth: 576 });
   // const isMediumScreen = useMediaQuery({ minWidth: 768 });
@@ -35,14 +35,14 @@ export default function Onboarding() {
   const handleBuyNow = async ({ productId, quantity }: CardPurchaseProps) => {
     console.log('quantity', quantity, productId);
     if (!zipCode) {
-      setError('Please enter a valid zip code');
+      setZipError('Please enter a valid zip code');
       return;
     }
     // how can i tell if im in safari or chrome
     if (window.navigator.userAgent.includes('Chrome')) {
-      handlePurhcaseChrome({ quantity, productId, zipCode });
+      await handlePurhcaseChrome({ quantity, productId, zipCode });
     } else {
-      handlePurchaseSafari({ quantity, productId, zipCode });
+      await handlePurchaseSafari({ quantity, productId, zipCode });
     }
   };
 
@@ -83,8 +83,8 @@ export default function Onboarding() {
 
     stripe
       ?.redirectToCheckout(stripeProps)
-      .then((result: { error?: { message: string } }) => {
-        if (result.error) {
+      .then((result: { error?: { message?: string } }) => {
+        if (result.error?.message) {
           // Display error to your customer (e.g., insufficient funds)
           console.error(result.error.message);
         }
@@ -95,19 +95,23 @@ export default function Onboarding() {
     quantity,
     productId,
   }: PurchaseProps) => {
-    const result = await clientA.queries.purchase({ quantity, productId });
-    console.log('result.data', result.data);
+    try {
+      const result = await clientA.queries.purchase({ quantity, productId });
+      console.log('result.data', result.data);
 
-    if (result.data) {
-      const parsedData = result.data;
+      if (result.data) {
+        const parsedData = result.data;
 
-      if (parsedData?.url) {
-        console.log('URL:', parsedData.url);
-        console.log('ID:', parsedData.id);
-        Linking.openURL(parsedData.url);
-      } else {
-        console.log('Failed to parse data.');
+        if (parsedData?.url) {
+          console.log('URL:', parsedData.url);
+          console.log('ID:', parsedData.id);
+          Linking.openURL(parsedData.url);
+        } else {
+          console.log('Failed to parse data.');
+        }
       }
+    } catch (error) {
+      console.error('Error in handlePurchaseChrome:', error);
     }
   };
 
@@ -118,14 +122,28 @@ export default function Onboarding() {
         className="flex h-full items-center  justify-center "
       >
         <FocusAwareStatusBar />
-
         <View className="w-full flex-1 justify-center">
-          <Alfajor style={{ width: '75%', alignSelf: 'center' }} />
-        </View>
-        <View className="justify-end ">
           <Text className="my-3 text-center text-5xl font-bold   color-white">
             ALFAJORES NY
           </Text>
+
+          <Hero
+            title="Delicious Peruvian Alfajores, made with love in New York"
+            subtitle="We are a family-owned business that has been selling alfajores in New York for more than 25 years."
+            buttonText="Buy Now"
+            onPress={() => {
+              document
+                .querySelector('.justify-left')
+                ?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            imageSource="https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWRxZmluYjB3cXFpczMtbWFpLWFsZmFqb3Jlc2RyaXZlYnVja2V0ZTNjNy03bjF6a3R0NWY5cmMiLCJrZXkiOiJJTUdfMDEzOS5KUEcifQ=="
+          />
+          {/* <Alfajor style={{ width: '75%', alignSelf: 'center' }} /> */}
+        </View>
+        <View className="justify-end ">
+          {/* <Text className="my-3 text-center text-5xl font-bold   color-white">
+            ALFAJORES NY
+          </Text> */}
           <Text className="mb-2 text-center text-lg text-gray-100">
             Delicious Peruvian Alfajores, made with love in New York
           </Text>
@@ -147,9 +165,13 @@ export default function Onboarding() {
         <View className="justify-left mb-2 ">
           <ZipInput
             callBack={({ success, zip }) => {
-              if (success) {
+              if (zip) {
                 setZipCode(zip);
+              } else {
+                setZipCode(undefined);
               }
+              console.log(zip, 'zip');
+              console.log(success, 'success');
             }}
           />
         </View>
@@ -167,10 +189,9 @@ export default function Onboarding() {
           {products.map((product) => (
             <Card
               key={product.id}
-              loading={false}
               onPress={handleBuyNow}
-              userId={0}
               id={product.id}
+              userId={0}
               image={product.image}
               title={product.name}
               body={product.body}
@@ -192,6 +213,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.1)', // Add a subtle overlay for a grayscale look
   },
 });
+
 const products = [
   {
     name: 'Large Alfajores Box',

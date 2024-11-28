@@ -4,7 +4,7 @@ import { Text, View } from '@/ui';
 
 type Props = {
   text: string;
-  color: string;
+  color?: string;
 };
 export const Title = ({ text, color = 'black' }: Props) => {
   return (

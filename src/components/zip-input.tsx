@@ -62,11 +62,11 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
     }
   }
 
-  function clearZip() {
-    setZipCodeResult(undefined);
+  const clearZip = () => {
     localStorage.removeItem(ZIP_STORAGE_KEY);
-    setZipcode(undefined);
-  }
+    setZipCodeResult(undefined);
+    callBack({ success: false, zip: undefined });
+  };
 
   function setZip(data: ZipData) {
     localStorage.setItem(ZIP_STORAGE_KEY, JSON.stringify(data));
@@ -89,8 +89,10 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
       return;
     }
 
+    console.log('will call validateZipCodeThenUpdateError');
     validateZipCodeThenUpdateError();
-  }, [zipCode, setError, isFirstTime, setIsFirstTime]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [zipCode, setError]);
 
   useEffect(() => {
     function updatecall() {
@@ -98,13 +100,16 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
         localStorage.getItem(ZIP_STORAGE_KEY) || 'null',
       );
       setZipCodeResult(cachedZip);
-      callBack({ success: true, zip: zipCodeResult?.zip });
+      if (cachedZip) {
+        callBack({ success: true, zip: cachedZip.zip });
+      } else {
+        callBack({ success: false });
+      }
     }
     updatecall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callBack]);
 
-  console.log(zipCodeResult, 'zipCodeResult');
   return (
     <>
       {!zipCodeResult ? (
@@ -124,7 +129,7 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
             {/* <Input label="Error" error="This is a message error" />
         <Input label="Focused" /> */}
             <Button
-              variant="secondary"
+              variant="default"
               label="Check Zip"
               disabled={buttonEnabled}
               loading={checkingZip}
@@ -146,15 +151,14 @@ export const ZipInput = ({ callBack }: ZipInputProps) => {
               color: 'white',
               fontSize: 16,
             }}
-            // className=" bg-red-700  "
           >
             x
           </Text>
 
-          <Text className="my-3 px-3 text-center text-5xl font-bold   color-white">
+          <Text className="my-3 px-3 text-center text-3xl font-bold ">
             Great news we deliver to your area!
           </Text>
-          <Text className="my-1 px-1 text-center text-3xl  color-slate-400">
+          <Text className="text-center  text-2xl ">
             {zipCodeResult?.city}, {zipCodeResult?.name}
           </Text>
         </View>

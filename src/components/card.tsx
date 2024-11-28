@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useColorScheme } from 'react-native';
 import SimpleStepper from 'react-native-simple-stepper';
 
 import type { Product } from '@/api';
@@ -7,21 +8,24 @@ import { Button, Image, Text, View } from '@/ui';
 type Props = Product;
 
 // eslint-disable-next-line max-lines-per-function
-export const Card = ({
-  id,
-  title,
-  body,
-  image,
-  price,
-  onPress,
-  loading,
-}: Props) => {
+export const Card = ({ id, title, body, image, price, onPress }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
+  const colorScheme = useColorScheme();
+  const [isLoading, setIsLoading] = useState(false);
 
   const dollars = (Number(price) / 100).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });
+
+  const handlePress = async () => {
+    setIsLoading(true);
+    try {
+      await onPress({ productId: id, quantity });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     // <Link href={`/feed/${id}`} asChild>
@@ -51,15 +55,9 @@ export const Card = ({
           valueChanged={setQuantity}
           disableDecrementImageTintColor={false}
           useColor
-          color={'black'}
+          color={colorScheme === 'dark' ? 'white' : 'black'}
         />
-        <Button
-          loading={loading}
-          label="Buy Now"
-          onPress={() => {
-            onPress({ quantity, productId: id });
-          }}
-        />
+        <Button loading={isLoading} label="Buy Now" onPress={handlePress} />
       </View>
     </View>
     //   </Pressable>
